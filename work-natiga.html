@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<!--
+  ══════════════════════════════════════════════════════════════
+  محمد حسين — مطوّر ومصمم رقمي
+  Mohammed Hussein — Developer & Digital Designer
+  © 2026 · جميع الحقوق محفوظة · All rights reserved
+  https://iegy.net · egyup@outlook.com
+
+  الكود والتصميم والرسوم دي ملكية خاصة. ممنوع النسخ أو إعادة
+  الاستخدام في أي مشروع تاني بدون إذن كتابي. راجع ملف LICENSE.
+
+  Proprietary code, design and artwork. No copying or reuse
+  without written permission. See LICENSE.
+
+  ⚠️  الـ<!DOCTYPE html> لازم يفضل أول سطر في الملف.
+      أي حاجة قبله — حتى تعليق — بتخلي المتصفح يدخل Quirks Mode
+      وتكسر حساب السكرول وحركة الروبوت.
+  ══════════════════════════════════════════════════════════════
+-->
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +26,7 @@
 <meta name="author" content="محمد حسين">
 <meta name="theme-color" content="#FBF7F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141210" media="(prefers-color-scheme: dark)">
-<link rel="canonical" href="https://iegy.github.io/work-natiga.html">
+<link rel="canonical" href="https://iegy.net/work-natiga.html">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="article">
@@ -16,15 +34,15 @@
 <meta property="og:site_name" content="محمد حسين — مطوّر ومصمم رقمي">
 <meta property="og:title" content="أداة استعلام نتيجة الثانوية العامة — محمد حسين">
 <meta property="og:description" content="استعلام سريع بالنتيجة برقم الجلوس أو بالاسم الرباعي — مصمّم يتحمّل ضغط لحظة ظهور النتيجة.">
-<meta property="og:url" content="https://iegy.github.io/work-natiga.html">
-<meta property="og:image" content="https://iegy.github.io/cover-natiga.webp">
+<meta property="og:url" content="https://iegy.net/work-natiga.html">
+<meta property="og:image" content="https://iegy.net/cover-natiga.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="أداة استعلام نتيجة الثانوية العامة — محمد حسين">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="أداة استعلام نتيجة الثانوية العامة — محمد حسين">
 <meta name="twitter:description" content="استعلام سريع بالنتيجة برقم الجلوس أو بالاسم الرباعي — مصمّم يتحمّل ضغط لحظة ظهور النتيجة.">
-<meta name="twitter:image" content="https://iegy.github.io/cover-natiga.webp">
+<meta name="twitter:image" content="https://iegy.net/cover-natiga.webp">
 
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -32,9 +50,8 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="cairo-ar-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="cairo-ar-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script>
   // set theme before first paint — no flash of the wrong theme
@@ -42,7 +59,7 @@
   if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
   document.documentElement.dataset.theme=t;}catch(e){}})();
 </script>
-<script type="application/ld+json">{"@context": "https://schema.org","@type": "CreativeWork","name": "أداة استعلام نتيجة الثانوية العامة","description": "أداة استعلام سريعة عن نتيجة الثانوية العامة برقم الجلوس أو بالاسم الرباعي، بواجهة بسيطة وسريعة الاستجابة، صُممت لتتحمل ضغط آلاف الطلاب في نفس لحظة ظهور النتيجة.","url": "https://iegy.github.io/natiga/","author": {"@type": "Person","name": "محمد حسين"},"image": "https://iegy.github.io/cover-natiga.webp","inLanguage": "ar"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org","@type": "CreativeWork","name": "أداة استعلام نتيجة الثانوية العامة","description": "أداة استعلام سريعة عن نتيجة الثانوية العامة برقم الجلوس أو بالاسم الرباعي، بواجهة بسيطة وسريعة الاستجابة، صُممت لتتحمل ضغط آلاف الطلاب في نفس لحظة ظهور النتيجة.","url": "https://iegy.github.io/natiga/","author": {"@type": "Person","name": "محمد حسين"},"image": "https://iegy.net/cover-natiga.webp","inLanguage": "ar"}</script>
 </head>
 <body data-page="portfolio">
 
@@ -86,6 +103,7 @@
       <a href="https://iegy.github.io/natiga/" class="btn btn-primary" target="_blank" rel="noopener">زيارة المشروع ↗</a>
       <a href="contact.html" class="btn btn-outline">عايز حاجة شبه دي</a>
     </div>
+
     <dl class="case-meta">
       <div><dt>SECTOR</dt><dd>تعليم</dd></div>
       <div><dt>ROLE</dt><dd>تصميم وتطوير كامل</dd></div>

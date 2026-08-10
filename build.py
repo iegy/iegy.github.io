@@ -6,10 +6,10 @@
 """
 import json, os, sys, io, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from projects import PROJECTS, FILTERS, TESTIMONIALS
+from projects import PROJECTS, FILTERS, TESTIMONIALS, DOWNLOADS
 
 # ⚠️ غيّر السطر ده لعنوان موقعك الحقيقي (بشرطة مائلة في الآخر)
-SITE = "https://iegy.github.io/"
+SITE = "https://iegy.net/"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = open(os.path.join(HERE, 'template.html'), encoding='utf-8').read()
@@ -63,6 +63,13 @@ def svg(name):
 # ---------------------------------------------------------------- shared blocks
 def work_card(p, idx=None):
     tags = "".join('<span class="tag">%s</span>' % t for t in p["tags"][:3])
+    # المشاريع الهدية مالهاش موقع تزوره — ليها ملف تحمّله
+    if p.get("gift"):
+        out_link = ('<a class="link-out is-gift" href="%s" download>حمّله مجانًا ⬇</a>'
+                    % DOWNLOADS[p["slug"]]["url"])
+    else:
+        out_link = ('<a class="link-out" href="%s" target="_blank" rel="noopener">زيارة الموقع ↗</a>'
+                    % p["url"])
     return f'''      <article class="work" data-cat="{p['cats']}">
         <a class="work-shot" href="work-{p['slug']}.html" aria-label="تفاصيل مشروع {p['short']}">
           <span class="work-idx">&lt;{p['n']}/&gt;</span>
@@ -74,10 +81,50 @@ def work_card(p, idx=None):
           <div>{tags}</div>
           <div class="work-foot">
             <a class="link-out" href="work-{p['slug']}.html">تفاصيل المشروع ←</a>
-            <a class="link-out" href="{p['url']}" target="_blank" rel="noopener">زيارة الموقع ↗</a>
+            {out_link}
           </div>
         </div>
       </article>'''
+
+
+# قسم التطبيقات المجانية — بيتبني تلقائيًا من كل مشروع فيه "gift":True.
+# ضيف تطبيق تالت في projects.py والقسم هيوسّع نفسه من غير ما تلمس الملف ده.
+def _gift_card(p):
+    d = DOWNLOADS[p["slug"]]
+    size = f' · {d["size"]}' if d.get("size") else ''
+    return f'''      <article class="app reveal">
+        <a class="app-shot" href="work-{p['slug']}.html" aria-label="تفاصيل {d['name']}">
+          <img src="thumb-{p['slug']}.webp" alt="لقطة من تطبيق {d['name']}" width="880" height="550" loading="lazy" decoding="async">
+        </a>
+        <div class="app-body">
+          <h3>{d['name']}</h3>
+          <p>{d['line']}</p>
+          <div class="app-actions">
+            <a href="{d['url']}" class="btn btn-primary" download>حمّله مجانًا ⬇</a>
+            <a href="work-{p['slug']}.html" class="btn btn-outline">التفاصيل</a>
+          </div>
+          <small>الإصدار {d['version']}{size} · أندرويد</small>
+        </div>
+      </article>'''
+
+
+_gifts = [p for p in PROJECTS if p.get("gift") and p["slug"] in DOWNLOADS]
+GIFT_BANNER = (f'''<section class="gift-wrap">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;margin-inline:auto">
+      <div class="eyebrow">FREE DOWNLOAD</div>
+      <h2>تطبيقات مجانية — هدية لأي حد بيزور الموقع</h2>
+      <p>نسخ كاملة: من غير إعلانات، ولا علامة مائية، ولا اشتراك، ولا تسجيل.</p>
+    </div>
+    <div class="app-grid">
+''' + "\n".join(_gift_card(p) for p in _gifts) + '''
+    </div>
+    <p class="gift-note">
+      أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» —
+      ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.
+    </p>
+  </div>
+</section>''') if _gifts else ''
 
 
 CTA = '''<section class="section-alt">
@@ -154,7 +201,7 @@ def home():
 
 <div class="wrap">
   <div class="stats stagger">
-    <div class="stat"><b><span data-count="6" data-suffix="">0</span></b><span>مشاريع منشورة أونلاين</span></div>
+    <div class="stat"><b><span data-count="9" data-suffix="">0</span></b><span>مشاريع منشورة ومتاحة</span></div>
     <div class="stat"><b><span data-count="4" data-suffix="">0</span></b><span>مجالات شغل أساسية</span></div>
     <div class="stat"><b><span data-count="100" data-suffix="%">0</span></b><span>واجهات عربية RTL</span></div>
     <div class="stat"><b><span data-count="1" data-suffix="">0</span></b><span>يوم عمل للرد عليك</span></div>
@@ -183,7 +230,7 @@ def home():
     <div class="section-head reveal">
       <div class="eyebrow">SELECTED WORK</div>
       <h2>مشاريع اشتغلت عليها فعلًا</h2>
-      <p>كل مشروع منهم شغّال أونلاين دلوقتي — تقدر تفتحه وتجربه بنفسك.</p>
+      <p>كل مشروع منهم متاح دلوقتي — تفتحه وتجربه، أو تحمّله لو تطبيق.</p>
     </div>
     <div class="stagger work-grid">
 {cards}
@@ -193,6 +240,8 @@ def home():
     </div>
   </div>
 </section>
+
+{GIFT_BANNER}
 
 {quotes}
 
@@ -408,7 +457,7 @@ def portfolio():
 {CTA}
 '''
     return render("portfolio.html", "portfolio", "أعمالي — محمد حسين",
-        "ستة مشاريع منشورة أونلاين: أنظمة كاشير ومخزون، إدارة مالية سحابية، تتبع طلبات متعدد الفروع، مواقع شركات وأدوات عامة.",
+        "سبعة مشاريع منشورة: أنظمة كاشير ومخزون، إدارة مالية سحابية، تتبع طلبات متعدد الفروع، مواقع شركات، وتطبيق أندرويد مجاني لأدوات الفيديو والصوت.",
         body, jsonld=ld)
 
 
@@ -480,6 +529,20 @@ def contact():
 
 def case(p, prev, nxt):
     meta = "\n".join(f'      <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in p["meta"])
+    if p.get("gift"):
+        d = DOWNLOADS[p["slug"]]
+        size = f' · {d["size"]}' if d.get("size") else ''
+        hero_btn = (f'<a href="{d["url"]}" class="btn btn-primary" download>'
+                    f'حمّل {d["name"]} مجانًا ⬇</a>')
+        install_note = f'''    <div class="install-note">
+      <b>مجاني بالكامل</b> — نسخة كاملة من غير إعلانات ولا علامة مائية ولا اشتراك.
+      الإصدار {d["version"]}{size} · لأجهزة أندرويد.
+      <span>أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من مصدر غير معروف — ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.</span>
+    </div>'''
+    else:
+        hero_btn = (f'<a href="{p["url"]}" class="btn btn-primary" target="_blank" '
+                    f'rel="noopener">زيارة المشروع ↗</a>')
+        install_note = ''
     points = "\n".join(f'      <li>{x}</li>' for x in p["points"])
     stack = "".join('<span class="tag">%s</span>' % t for t in p["stack"])
     nav = []
@@ -496,9 +559,10 @@ def case(p, prev, nxt):
     <h1 style="font-size:clamp(1.75rem,3.7vw,2.5rem)">{p['title']}</h1>
     <p class="lead" style="margin-top:16px;max-width:660px">{p['excerpt']}</p>
     <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="{p['url']}" class="btn btn-primary" target="_blank" rel="noopener">زيارة المشروع ↗</a>
+      {hero_btn}
       <a href="contact.html" class="btn btn-outline">عايز حاجة شبه دي</a>
     </div>
+{install_note}
     <dl class="case-meta">
 {meta}
     </dl>
@@ -534,7 +598,8 @@ def case(p, prev, nxt):
 {CTA}
 '''
     ld = {"@context": "https://schema.org", "@type": "CreativeWork",
-          "name": p["title"], "description": p["excerpt"], "url": p["url"],
+          "name": p["title"], "description": p["excerpt"],
+          "url": p["url"] or (SITE + f"work-{p['slug']}.html"),
           "author": {"@type": "Person", "name": "محمد حسين"},
           "image": SITE + f"cover-{p['slug']}.webp",
           "inLanguage": "ar"}
