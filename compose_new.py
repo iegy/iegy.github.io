@@ -28,6 +28,29 @@ JOBS = {
         ("qaher-hero.png",  0, 0),
         ("qaher-certs.png", 0, 0),
     ], "web2"),
+
+    # Omega Care: شاشتين ويب — لقطات متصفح كاملة، بنقص شريط كروم فوق وشريط المهام تحت
+    "omegacare": (("#1c1147", "#6c3fa8"), [
+        ("omegacare-hero.png", 128, 42),
+        ("omegacare-lab.png",  128, 42),
+    ], "web2"),
+
+    # الحمد للفحم: شاشتين ويب — هوية داكنة فحمية بلمسة ذهبية
+    "alhamd": (("#14100c", "#caa15a"), [
+        ("alhamd-hero.png", 128, 42),
+        ("alhamd-map.png",  128, 42),
+    ], "web2"),
+
+    # Kallista: شاشتين ويب — هوية فاتحة كريمية بلمسة ذهبية هادئة
+    "kallista": (("#eef0e6", "#8e9b7a"), [
+        ("kallista-hero.png",    128, 42),
+        ("kallista-gallery.png", 128, 42),
+    ], "web2"),
+
+    # رِفق: شاشة موبايل واحدة — تدرّج تركوازي دافئ يطابق هوية التطبيق
+    "rifq": (("#f3ede0", "#4a9e94"), [
+        ("rifq-home.jpg", 0, 0),
+    ], "phone1"),
 }
 
 

@@ -201,7 +201,7 @@ def home():
 
 <div class="wrap">
   <div class="stats stagger">
-    <div class="stat"><b><span data-count="9" data-suffix="">0</span></b><span>مشاريع منشورة ومتاحة</span></div>
+    <div class="stat"><b><span data-count="13" data-suffix="">0</span></b><span>مشاريع منشورة ومتاحة</span></div>
     <div class="stat"><b><span data-count="4" data-suffix="">0</span></b><span>مجالات شغل أساسية</span></div>
     <div class="stat"><b><span data-count="100" data-suffix="%">0</span></b><span>واجهات عربية RTL</span></div>
     <div class="stat"><b><span data-count="1" data-suffix="">0</span></b><span>يوم عمل للرد عليك</span></div>
