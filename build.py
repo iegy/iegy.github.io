@@ -7,6 +7,7 @@
 import json, os, sys, io, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from projects import PROJECTS, FILTERS, TESTIMONIALS, DOWNLOADS
+from posts import POSTS, BLOG_FILTERS
 
 # ⚠️ غيّر السطر ده لعنوان موقعك الحقيقي (بشرطة مائلة في الآخر)
 SITE = "https://iegy.net/"
@@ -127,6 +128,44 @@ GIFT_BANNER = (f'''<section class="gift-wrap">
 </section>''') if _gifts else ''
 
 
+# قسم "أحدث من المدونة" — بيتبني تلقائيًا من posts.py، بياخد آخر 3 مقالات.
+# ضيف مقال جديد في posts.py والقسم هيتحدث لوحده من غير ما تلمس الملف ده.
+def post_card(p):
+    tags = "".join('<span class="tag">%s</span>' % t for t in p["tags"][:3])
+    return f'''      <article class="work" data-cat="{p['cats']}">
+        <a class="work-shot" href="blog-{p['slug']}.html" aria-label="اقرأ مقال {p['title']}">
+          <span class="work-idx">{p['date_display']}</span>
+          <img src="thumb-{p['slug']}.webp" alt="غلاف مقال {p['title']}" width="880" height="550" loading="lazy" decoding="async">
+        </a>
+        <div class="work-body">
+          <h3><a href="blog-{p['slug']}.html">{p['title']}</a></h3>
+          <p>{p['excerpt']}</p>
+          <div>{tags}</div>
+          <div class="work-foot">
+            <a class="link-out" href="blog-{p['slug']}.html">اقرأ المقال ←</a>
+            <span class="link-out" style="opacity:.6;cursor:default">{p['read_min']} دقايق قراءة</span>
+          </div>
+        </div>
+      </article>'''
+
+
+BLOG_PREVIEW = f'''<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">FROM THE BLOG</div>
+      <h2>جديد المدونة</h2>
+      <p>مقالات في تصميم المواقع والتقنية والذكاء الاصطناعي — بنزوّدها بشكل دوري.</p>
+    </div>
+    <div class="stagger work-grid">
+''' + "\n".join(post_card(p) for p in POSTS[:3]) + '''
+    </div>
+    <div style="margin-top:32px">
+      <a href="blog.html" class="btn btn-outline">كل المقالات ←</a>
+    </div>
+  </div>
+</section>''' if POSTS else ''
+
+
 CTA = '''<section class="section-alt">
   <div class="wrap reveal" style="text-align:center;max-width:620px">
     <div class="eyebrow">LET'S BUILD</div>
@@ -242,6 +281,8 @@ def home():
 </section>
 
 {GIFT_BANNER}
+
+{BLOG_PREVIEW}
 
 {quotes}
 
@@ -608,6 +649,113 @@ def case(p, prev, nxt):
                   ogimage=f"cover-{p['slug']}.webp")
 
 
+def blog():
+    cards = "\n".join(post_card(p) for p in POSTS)
+    fhtml = "\n".join('      <button class="filter" type="button" data-filter="%s" aria-pressed="%s">%s</button>'
+                      % (k, "true" if k == "all" else "false", label) for k, label in BLOG_FILTERS)
+    ld = {"@context": "https://schema.org", "@type": "Blog",
+          "name": "مدونة محمد حسين", "url": SITE + "blog.html",
+          "blogPost": [{"@type": "BlogPosting", "headline": p["title"],
+                        "url": SITE + f"blog-{p['slug']}.html",
+                        "datePublished": p["date"], "description": p["excerpt"]} for p in POSTS]}
+
+    body = f'''
+<section>
+  <div class="wrap section-head reveal">
+    <div class="eyebrow">THE BLOG</div>
+    <h1 style="font-size:clamp(1.85rem,3.9vw,2.55rem)">مقالات في التصميم والتقنية،<br>وقراءة عملية للذكاء الاصطناعي.</h1>
+    <p class="lead" style="margin-top:16px">مقالات بنزوّدها بشكل دوري — تصميم مواقع، أداء وأمان، وتطبيقات الذكاء الاصطناعي في مجالات مختلفة.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="filters reveal" role="group" aria-label="تصفية المقالات">
+{fhtml}
+    </div>
+
+    <div class="stagger work-grid">
+{cards}
+    </div>
+    <p id="no-results" hidden style="text-align:center;padding:40px 0">مفيش مقالات في التصنيف ده حاليًا.</p>
+  </div>
+</section>
+
+{CTA}
+'''
+    return render("blog.html", "blog", "المدونة — محمد حسين",
+        "مقالات في تصميم المواقع، الأداء والأمان، وتطبيقات الذكاء الاصطناعي في الطب والهندسة والعمل — مقالات بنزوّدها بشكل دوري.",
+        body, jsonld=ld)
+
+
+def article(p, prev, nxt):
+    tags = "".join('<span class="tag">%s</span>' % t for t in p["tags"])
+    related = [x for x in POSTS if x["slug"] != p["slug"] and x["cats"] == p["cats"]][:2]
+    if len(related) < 2:
+        related += [x for x in POSTS if x["slug"] != p["slug"] and x not in related][:2 - len(related)]
+    relhtml = "\n".join(post_card(x) for x in related)
+
+    nav = []
+    if prev: nav.append(f'<a class="link-out" href="blog-{prev["slug"]}.html">→ {prev["title"]}</a>')
+    else: nav.append('<span></span>')
+    if nxt: nav.append(f'<a class="link-out" href="blog-{nxt["slug"]}.html">{nxt["title"]} ←</a>')
+    else: nav.append('<span></span>')
+
+    body = f'''
+<div class="case-hero">
+  <div class="wrap">
+    <a class="link-out" href="blog.html" style="margin-bottom:18px">→ كل المقالات</a>
+    <div class="eyebrow">{p['cat']}</div>
+    <h1 style="font-size:clamp(1.75rem,3.7vw,2.5rem)">{p['title']}</h1>
+    <p class="lead" style="margin-top:16px;max-width:660px">{p['excerpt']}</p>
+    <dl class="case-meta">
+      <div><dt>التاريخ</dt><dd>{p['date_display']}</dd></div>
+      <div><dt>مدة القراءة</dt><dd>{p['read_min']} دقايق</dd></div>
+      <div><dt>التصنيف</dt><dd>{p['cat']}</dd></div>
+    </dl>
+    <div class="case-shot reveal">
+      <img src="cover-{p['slug']}.webp" alt="غلاف مقال {p['title']}" width="1600" height="1000" decoding="async">
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap prose reveal">
+{p['body']}
+    <div style="margin-top:18px">{tags}</div>
+
+    <div style="display:flex;justify-content:space-between;gap:16px;margin-top:52px;padding-top:24px;border-top:1px solid var(--line)">
+      {nav[0]}
+      {nav[1]}
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">KEEP READING</div>
+      <h2>مقالات تانية تهمك</h2>
+    </div>
+    <div class="stagger work-grid">
+{relhtml}
+    </div>
+  </div>
+</section>
+
+{CTA}
+'''
+    ld = {"@context": "https://schema.org", "@type": "BlogPosting",
+          "headline": p["title"], "description": p["excerpt"],
+          "url": SITE + f"blog-{p['slug']}.html",
+          "datePublished": p["date"],
+          "author": {"@type": "Person", "name": "محمد حسين"},
+          "publisher": {"@type": "Person", "name": "محمد حسين"},
+          "image": SITE + f"cover-{p['slug']}.webp",
+          "inLanguage": "ar"}
+    return render(f"blog-{p['slug']}.html", "blog", f"{p['title']} — مدونة محمد حسين",
+                  p["meta"], body, jsonld=ld, ogtype="article",
+                  ogimage=f"cover-{p['slug']}.webp")
+
+
 def notfound():
     body = '''
 <section style="padding-block:clamp(70px,12vw,140px);text-align:center">
@@ -654,10 +802,13 @@ def extras(pages):
 
 
 if __name__ == "__main__":
-    pages = [home(), about(), services(), portfolio(), contact()]
+    pages = [home(), about(), services(), portfolio(), contact(), blog()]
     for i, p in enumerate(PROJECTS):
         pages.append(case(p, PROJECTS[i - 1] if i > 0 else None,
                           PROJECTS[i + 1] if i < len(PROJECTS) - 1 else None))
+    for i, p in enumerate(POSTS):
+        pages.append(article(p, POSTS[i - 1] if i > 0 else None,
+                             POSTS[i + 1] if i < len(POSTS) - 1 else None))
     pages.append(notfound())
     extras(pages)
     print("✓ اتبنى %d صفحة:" % len(pages))

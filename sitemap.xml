@@ -5,6 +5,7 @@
   <url><loc>https://iegy.net/services.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://iegy.net/portfolio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://iegy.net/contact.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://iegy.net/work-newshop.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://iegy.net/work-egyup.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://iegy.net/work-noor.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -18,4 +19,10 @@
   <url><loc>https://iegy.net/work-alhamd.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://iegy.net/work-kallista.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://iegy.net/work-rifq.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://iegy.net/blog-web-design-2026.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog-ai-in-medicine.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog-ai-in-engineering.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog-website-speed-matters.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog-generative-ai-work.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://iegy.net/blog-small-business-website-security.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
