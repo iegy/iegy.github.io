@@ -5,6 +5,7 @@
 الهيدر والفوتر موجودين مرة واحدة في template.html — عدّل هناك وهيتطبق على كل الصفحات.
 """
 import json, os, sys, io, re
+from datetime import date
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from projects import PROJECTS, FILTERS, TESTIMONIALS, DOWNLOADS
 from posts import POSTS, BLOG_FILTERS
@@ -33,6 +34,7 @@ def render(slug, page, title, desc, body, jsonld=None, ogtype="website", ogimage
     html = BASE
     for k, v in {
         "title": title, "desc": desc, "site": SITE, "slug": slug, "page": page,
+        "canonical": SITE if slug == "index.html" else SITE + slug,
         "ogtype": ogtype, "ogimage": ogimage,
         "jsonld": json.dumps(jsonld or PERSON_LD, ensure_ascii=False, indent=0).replace("\n", ""),
         "body": body,
@@ -240,10 +242,10 @@ def home():
 
 <div class="wrap">
   <div class="stats stagger">
-    <div class="stat"><b><span data-count="13" data-suffix="">0</span></b><span>مشاريع منشورة ومتاحة</span></div>
-    <div class="stat"><b><span data-count="4" data-suffix="">0</span></b><span>مجالات شغل أساسية</span></div>
-    <div class="stat"><b><span data-count="100" data-suffix="%">0</span></b><span>واجهات عربية RTL</span></div>
-    <div class="stat"><b><span data-count="1" data-suffix="">0</span></b><span>يوم عمل للرد عليك</span></div>
+    <div class="stat"><b><span data-count="{len(PROJECTS)}" data-suffix="">{len(PROJECTS)}</span></b><span>مشاريع منشورة ومتاحة</span></div>
+    <div class="stat"><b><span data-count="4" data-suffix="">4</span></b><span>مجالات شغل أساسية</span></div>
+    <div class="stat"><b><span data-count="100" data-suffix="%">100%</span></b><span>واجهات عربية RTL</span></div>
+    <div class="stat"><b><span data-count="1" data-suffix="">1</span></b><span>يوم عمل للرد عليك</span></div>
   </div>
 </div>
 
@@ -498,7 +500,7 @@ def portfolio():
 {CTA}
 '''
     return render("portfolio.html", "portfolio", "أعمالي — محمد حسين",
-        "سبعة مشاريع منشورة: أنظمة كاشير ومخزون، إدارة مالية سحابية، تتبع طلبات متعدد الفروع، مواقع شركات، وتطبيق أندرويد مجاني لأدوات الفيديو والصوت.",
+        f"{len(PROJECTS)} مشروعًا منشورًا: مواقع وأنظمة إدارة أعمال وتطبيقات وأدوات رقمية عربية، مع صفحات تفصيلية وروابط تجربة أو تحميل مباشرة.",
         body, jsonld=ld)
 
 
@@ -527,13 +529,13 @@ def contact():
           data-access-key="dc9615a9-63f3-4806-91e3-6828f5b85ffe">
       <div class="field">
         <label for="name">الاسم</label>
-        <input id="name" name="name" type="text" placeholder="اسمك الكامل" autocomplete="name" required>
-        <span class="err">اكتب اسمك من فضلك.</span>
+        <input id="name" name="name" type="text" placeholder="اسمك الكامل" autocomplete="name" required aria-describedby="name-error" aria-invalid="false">
+        <span class="err" id="name-error">اكتب اسمك من فضلك.</span>
       </div>
       <div class="field">
         <label for="contact">إيميل أو رقم واتساب</label>
-        <input id="contact" name="contact" type="text" placeholder="أفضل وسيلة نتواصل بيها" required>
-        <span class="err">محتاج وسيلة أقدر أرد عليك بيها.</span>
+        <input id="contact" name="contact" type="text" placeholder="أفضل وسيلة نتواصل بيها" required aria-describedby="contact-error" aria-invalid="false">
+        <span class="err" id="contact-error">محتاج وسيلة أقدر أرد عليك بيها.</span>
       </div>
       <div class="field">
         <label for="budget">الميزانية التقريبية (اختياري)</label>
@@ -547,8 +549,8 @@ def contact():
       </div>
       <div class="field">
         <label for="message">تفاصيل المشروع</label>
-        <textarea id="message" name="message" placeholder="احكيلي عن فكرتك، والمدة اللي محتاجها..." required></textarea>
-        <span class="err">اكتب سطرين على الأقل عن المشروع.</span>
+        <textarea id="message" name="message" placeholder="احكيلي عن فكرتك، والمدة اللي محتاجها..." required aria-describedby="message-error" aria-invalid="false"></textarea>
+        <span class="err" id="message-error">اكتب سطرين على الأقل عن المشروع.</span>
       </div>
 
       <button type="submit" class="btn btn-primary" style="width:100%">إرسال بالإيميل</button>
@@ -556,7 +558,7 @@ def contact():
         أو ابعتها على واتساب
       </button>
       <div class="form-status" role="status" aria-live="polite"></div>
-      <p class="form-note">بياناتك بتوصلني أنا بس، ومش بتتسجل في أي مكان تاني.</p>
+      <p class="form-note">تُستخدم بياناتك فقط للرد على طلبك، ويتم إرسال النموذج عبر خدمة Web3Forms.</p>
     </form>
   </div>
 </section>
@@ -777,7 +779,7 @@ def notfound():
 def extras(pages):
     # sitemap
     urls = "\n".join(
-        f'  <url><loc>{SITE}{s}</loc><changefreq>monthly</changefreq>'
+        f'  <url><loc>{SITE if s=="index.html" else SITE+s}</loc><lastmod>{date.today().isoformat()}</lastmod><changefreq>monthly</changefreq>'
         f'<priority>{"1.0" if s=="index.html" else "0.8" if not s.startswith("work-") else "0.7"}</priority></url>'
         for s in pages if s != "404.html")
     open(os.path.join(HERE, 'sitemap.xml'), 'w', encoding='utf-8').write(
