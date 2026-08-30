@@ -1,0 +1,37 @@
+name: Safe build new portfolio projects
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/portfolio_safe_update.py'
+      - '.github/workflows/portfolio-safe-builder.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-feature-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Create isolated generated branch
+        run: |
+          git switch -c portfolio-projects-generated-2026-08-30
+      - name: Apply and validate portfolio update
+        run: |
+          python3 .github/portfolio_safe_update.py
+          git diff --check
+      - name: Commit generated site only to feature branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add projects.py knowledge.js '*.html' sitemap.xml robots.txt site.webmanifest .nojekyll
+          git commit -m 'feat: add Rafiqi web, Rafiqi Android and ADWYA projects'
+          git push origin HEAD:portfolio-projects-generated-2026-08-30
