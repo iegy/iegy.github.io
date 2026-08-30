@@ -1,3 +1,4 @@
+# Temporary one-time runner; it writes only to the isolated feature branch.
 name: Temporary portfolio performance runner
 
 on:
