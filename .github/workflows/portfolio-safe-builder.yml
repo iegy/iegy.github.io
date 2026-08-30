@@ -25,6 +25,16 @@ jobs:
       - name: Create isolated generated branch
         run: |
           git switch -c portfolio-projects-generated-2026-08-30
+      - name: Apply boundary hotfix to one-time updater
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/portfolio_safe_update.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('return text[:start] + body + text[end:]', 'return text[:start] + body + text[end+1:]')
+          s=s.replace('kb = kb.replace(insert_before, new_topics + insert_before, 1)', 'kb = kb.replace(insert_before, new_topics + insert_before[1:], 1)')
+          p.write_text(s,encoding='utf-8')
+          PY
       - name: Apply and validate portfolio update
         run: |
           python3 .github/portfolio_safe_update.py
