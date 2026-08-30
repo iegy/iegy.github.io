@@ -1,11 +1,11 @@
 # One-time safety workflow: public-site changes are written to a separate branch only.
-name: Safe build new portfolio projects
+name: Safe polish new portfolio projects
 
 on:
   push:
     branches: [main]
     paths:
-      - '.github/portfolio_safe_update.py'
+      - '.github/portfolio_generate_art.py'
       - '.github/workflows/portfolio-safe-builder.yml'
   workflow_dispatch:
 
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  build-feature-branch:
+  polish-feature-branch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,27 +22,53 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Create isolated generated branch
+      - name: Check out isolated generated branch
         run: |
-          git switch -c portfolio-projects-generated-2026-08-30
-      - name: Apply boundary hotfix to one-time updater
+          git switch -C portfolio-projects-generated-2026-08-30 origin/portfolio-projects-generated-2026-08-30
+          git checkout origin/main -- .github/portfolio_generate_art.py
+      - name: Polish wording and rebuild canonical generated pages
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('.github/portfolio_safe_update.py')
-          s=p.read_text(encoding='utf-8')
-          s=s.replace('return text[:start] + body + text[end:]', 'return text[:start] + body + text[end+1:]')
-          s=s.replace('kb = kb.replace(insert_before, new_topics + insert_before, 1)', 'kb = kb.replace(insert_before, new_topics + insert_before[1:], 1)')
-          p.write_text(s,encoding='utf-8')
+          for name in ['projects.py','knowledge.js']:
+              p=Path(name); s=p.read_text(encoding='utf-8')
+              s=s.replace('أذكار ورقية شرعية', 'أذكار ورُقية شرعية')
+              s=s.replace('أذكار ورقية وسبحة', 'أذكار ورُقية وسبحة')
+              s=s.replace('عايز تضيف تطبيق تالت؟', 'عايز تضيف تطبيق جديد؟')
+              p.write_text(s,encoding='utf-8')
           PY
-      - name: Apply and validate portfolio update
+          python3 -m py_compile projects.py build.py
+          node --check knowledge.js
+          python3 build.py
+          printf '\n' > .nojekyll
+      - name: Generate optimized project artwork
         run: |
-          python3 .github/portfolio_safe_update.py
+          python3 -m pip install --quiet pillow
+          python3 .github/portfolio_generate_art.py
+          rm .github/portfolio_generate_art.py
+      - name: Validate complete isolated branch
+        run: |
+          python3 - <<'PY'
+          import projects
+          from pathlib import Path
+          from PIL import Image
+          assert len(projects.PROJECTS)==16
+          assert [p['slug'] for p in projects.PROJECTS[-3:]]==['rafiqi-web','rafiqi-android','adwya']
+          for slug in ['rafiqi-web','rafiqi-android','adwya']:
+              assert Path(f'work-{slug}.html').exists()
+              assert Image.open(f'cover-{slug}.webp').size==(1600,1000)
+              assert Image.open(f'thumb-{slug}.webp').size==(880,550)
+          assert Path('.nojekyll').read_bytes()==b'\n'
+          assert 'data-count="16"' in Path('index.html').read_text(encoding='utf-8')
+          assert 'https://rafiqi.iegy.net/download/Rafiqi.apk' in Path('knowledge.js').read_text(encoding='utf-8')
+          assert 'https://adwya.iegy.net/' in Path('knowledge.js').read_text(encoding='utf-8')
+          PY
+          node --check knowledge.js
           git diff --check
-      - name: Commit generated site only to feature branch
+      - name: Commit polish only to isolated branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add projects.py knowledge.js '*.html' sitemap.xml robots.txt site.webmanifest .nojekyll
-          git commit -m 'feat: add Rafiqi web, Rafiqi Android and ADWYA projects'
+          git add projects.py knowledge.js '*.html' sitemap.xml robots.txt site.webmanifest .nojekyll 'cover-*.webp' 'thumb-*.webp'
+          git commit -m 'chore: polish new project content and artwork'
           git push origin HEAD:portfolio-projects-generated-2026-08-30
