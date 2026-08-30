@@ -1,3 +1,4 @@
+# One-time safety workflow: public-site changes are written to a separate branch only.
 name: Safe build new portfolio projects
 
 on:
