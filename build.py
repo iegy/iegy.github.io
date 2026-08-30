@@ -674,7 +674,7 @@ def blog():
 {fhtml}
     </div>
 
-    <div class="work-grid">
+    <div class="stagger work-grid">
 {cards}
     </div>
     <p id="no-results" hidden style="text-align:center;padding:40px 0">مفيش مقالات في التصنيف ده حاليًا.</p>
