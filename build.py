@@ -30,8 +30,13 @@ PERSON_LD = {
 }
 
 
+# بصمة لملف معلومات «مو»: بتتغير لوحدها لما الملف يتعدّل، فالمتصفحات تجيب النسخة الجديدة بدل القديمة المحفوظة.
+import hashlib
+KB_VER = hashlib.md5(open(os.path.join(HERE, 'knowledge.js'), 'rb').read()).hexdigest()[:8]
+
+
 def render(slug, page, title, desc, body, jsonld=None, ogtype="website", ogimage=OG):
-    html = BASE
+    html = BASE.replace('src="knowledge.js"', 'src="knowledge.js?v=%s"' % KB_VER)
     for k, v in {
         "title": title, "desc": desc, "site": SITE, "slug": slug, "page": page,
         "canonical": SITE if slug == "index.html" else SITE + slug,
