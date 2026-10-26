@@ -59,7 +59,7 @@
   if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
   document.documentElement.dataset.theme=t;}catch(e){}})();
 </script>
-<script type="application/ld+json">{"@context": "https://schema.org","@type": "MobileApplication","name": "جسر — Jisr","operatingSystem": "Android 9+","applicationCategory": "UtilitiesApplication","offers": {"@type": "Offer","price": "0","priceCurrency": "USD"},"url": "https://iegy.net/jisr","author": {"@type": "Person","name": "Mohammed Hussein"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org","@type": "MobileApplication","name": "جسر — Jisr","operatingSystem": "Android 9+","applicationCategory": "UtilitiesApplication","offers": {"@type": "Offer","price": "0","priceCurrency": "USD"},"featureList": ["أي نوع وأي حجم","مجلدات بهيكلها","مبيبدأش من الأول","سرعة ووقت متبقي","أكتر من جهاز مرة واحدة","الجودة بإيدك","تشفير من طرف لطرف","تأكد إنه جهازك","أجهزة موثوقة","بصمة لكل ملف","غرفة لأي متصفح","مجلد مشترك للقراءة فقط","حافظة مشتركة","نصوص وروابط سريعة","غرف وأعضاء","موبايل جديد في خطوات","نسخ احتياطي بين جهازين","سجل بكل حاجة","عربي وإنجليزي، فاتح وداكن","تحديث من جوه التطبيق","متوافق مع حصن"],"url": "https://iegy.net/jisr","author": {"@type": "Person","name": "Mohammed Hussein"}}</script>
 </head>
 <body data-page="portfolio">
 
@@ -95,54 +95,395 @@
 <main id="main">
 
 <style>
-.jz-hero{padding:clamp(28px,6vw,64px) 0 8px}
-.jz-hero .wrap{display:grid;gap:30px;align-items:center;grid-template-columns:1fr}
-@media(min-width:860px){.jz-hero .wrap{grid-template-columns:1.2fr .8fr}}
-.jz-logo{width:min(340px,70vw);justify-self:center;filter:drop-shadow(0 24px 40px rgba(14,59,42,.35));border-radius:28%}
-.jz-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.jz-note{color:var(--text-soft);font-size:.9rem;margin-top:12px}
-.jz-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:26px}
-.jz-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}
-.jz-card h3{margin:10px 0 6px;font-size:1.05rem}
-.jz-card p{margin:0;color:var(--text-soft);font-size:.95rem;line-height:1.8}
-.jz-ic{font-size:1.6rem}
-.jz-steps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:22px;counter-reset:s}
-.jz-step{background:var(--bg-alt);border-radius:var(--radius-lg);padding:18px 18px 18px 18px;counter-increment:s}
-.jz-step::before{content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#1F7A55;color:#fff;font-weight:700;margin-bottom:8px}
-.jz-q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:10px}
-.jz-q summary{cursor:pointer;font-weight:600}
-.jz-q p{margin:10px 0 0;color:var(--text-soft);line-height:1.8}
-.jz-btn{background:#1F7A55;color:#fff!important}
+.jz{--g1:#2A9468;--g2:#1F7A55;--g3:#0E3B2A;--g4:#07241A;--gold:#F0A52A;--ivory:#F6F3EC;--bad:#ff7a59}
+.jz section{padding-block:clamp(54px,8vw,96px)}
+.jz .eyebrow{color:var(--g2)}html[data-theme=dark] .jz .eyebrow{color:var(--g1)}
+.jz svg[viewBox='-24 -2 58 78']{aspect-ratio:58/78}
+.jz-dark{background:radial-gradient(1200px 600px at 80% -10%,#14583f 0,transparent 60%),linear-gradient(180deg,var(--g4),var(--g3));color:#EAF4EE}
+.jz-dark p,.jz-dark .lead{color:rgba(234,244,238,.78)}
+.jz-dark h1,.jz-dark h2,.jz-dark h3{color:#fff}
+.jz-dark .eyebrow{color:var(--gold)}
+.jz-dark .eyebrow::before,.jz-dark .eyebrow::after{color:rgba(255,255,255,.4)}
+.jz-btn{background:var(--gold);color:#241800!important;border-color:var(--gold)}
+.jz-btn:hover{background:#ffbb4a!important;color:#241800!important;box-shadow:0 14px 28px -12px rgba(240,165,42,.8)!important}
+.jz-btn-g{background:var(--g2);color:#fff!important}
+.jz-btn-g:hover{background:var(--g1)!important;color:#fff!important}
+.jz-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.jz-ghost:hover{background:#fff!important;color:var(--g3)!important}
+/* hero */
+.jz-hero{padding-block:clamp(34px,6vw,72px) clamp(38px,6vw,76px)!important;position:relative;overflow:hidden}
+.jz-hero-grid{display:grid;gap:clamp(26px,4vw,54px);align-items:center;grid-template-columns:1fr}
+@media(min-width:980px){.jz-hero-grid{grid-template-columns:.9fr 1.1fr}}
+.jz-hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:1.4}
+.jz-hero h1 em{font-style:normal;color:var(--gold);white-space:nowrap}
+.jz-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.jz-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.jz-pill{font-family:var(--font-mono);font-size:.74rem;padding:6px 13px;border:1px solid rgba(255,255,255,.22);border-radius:99px;color:#EAF4EE;background:rgba(255,255,255,.06);direction:rtl}
+.jz-note{font-size:.86rem;margin-top:14px;opacity:.85}
+/* scene */
+.jz-scene{position:relative;direction:ltr;aspect-ratio:16/10;border-radius:22px;overflow:hidden;container-type:inline-size;background:linear-gradient(180deg,#06231A 0%,#0C3A29 56%,#0E4A34 100%);box-shadow:0 40px 80px -36px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.08);isolation:isolate}
+.jz-deco{position:absolute;inset:0;width:100%;height:100%}
+.jz-star{animation:jzTw 3.2s ease-in-out infinite}
+.jz-star:nth-child(2n){animation-delay:.8s}.jz-star:nth-child(3n){animation-delay:1.7s}
+@keyframes jzTw{0%,100%{opacity:.25}50%{opacity:1}}
+.jz-wave{animation:jzWave 7s linear infinite}
+@keyframes jzWave{to{transform:translateX(-80px)}}
+.jz-phone{position:absolute;top:10%;width:17%;height:56%;border-radius:2.2cqw;background:#10161B;border:.45cqw solid #26313A;box-shadow:0 2cqw 4cqw -1.4cqw rgba(0,0,0,.7);display:flex;flex-direction:column;overflow:hidden;z-index:3}
+.jz-phone.s{right:1.5%}.jz-phone.r{left:1.5%}
+.jz-phone .bar{height:6%;display:flex;justify-content:center;align-items:center}
+.jz-phone .bar i{width:30%;height:34%;border-radius:9px;background:#26313A;display:block}
+.jz-phone .scr{flex:1;margin:0 7% 7%;border-radius:1.4cqw;background:linear-gradient(180deg,#F6F3EC,#E8F1EB);direction:rtl;padding:6% 7%;display:flex;flex-direction:column;gap:5%;font-size:clamp(7px,1.45cqw,15px);line-height:1.35;color:#0E3B2A;text-align:center;justify-content:center;align-items:center}
+.jz-phone .scr b{font-size:1.1em}
+.jz-phone .scr small{font-size:.82em;opacity:.7}
+.jz-phone .ico{font-size:2.5em;line-height:1}
+.jz-ring{--p:0;width:6.2cqw;height:6.2cqw;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--g2) calc(var(--p)*1%),#cfe3d8 0)}
+.jz-ring span{width:76%;height:76%;border-radius:50%;background:#F6F3EC;display:grid;place-items:center;font-weight:700;font-size:1.35cqw;font-family:var(--font-mono);color:#0E3B2A}
+.jz-lbl{position:absolute;top:68%;font-size:clamp(8px,1.5cqw,15px);color:rgba(255,255,255,.7);font-family:var(--font-ar);direction:rtl;z-index:3;width:17%;text-align:center}
+.jz-lbl.s{right:1.5%}.jz-lbl.r{left:1.5%}
+.jz-deck{position:absolute;left:17%;right:17%;top:66%;height:3.2%;z-index:2}
+.jz-walker{position:absolute;bottom:100%;width:8.4cqw;left:50%;transform:translateX(-50%);z-index:4;transition:filter .3s}
+.jz-walker svg{width:100%;height:auto;display:block;transform:scaleX(-1);overflow:visible}
+.jz-walker.go svg{animation:jzBob .5s ease-in-out infinite}
+@keyframes jzBob{0%,100%{transform:scaleX(-1) translateY(0)}50%{transform:scaleX(-1) translateY(-3.2%)}}
+.jz-pack{position:absolute;bottom:108%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:clamp(8px,1.5cqw,15px);font-family:var(--font-mono);background:var(--gold);color:#241800;padding:.25em .7em;border-radius:99px;direction:ltr;box-shadow:0 6px 14px -6px rgba(0,0,0,.6)}
+.jz-pack::after{content:"";position:absolute;top:100%;left:50%;margin-left:-.4em;border:.4em solid transparent;border-top-color:var(--gold)}
+.jz-gap{position:absolute;top:-2px;bottom:-2px;width:7%;margin-left:-3.5%;background:#06231A;opacity:0;pointer-events:none;transition:opacity .25s;z-index:3;border-inline:.25cqw dashed var(--bad)}
+.jz-gap::after{content:"⚡";position:absolute;left:50%;top:-340%;transform:translateX(-50%);font-size:3cqw;filter:drop-shadow(0 0 8px var(--bad))}
+.jz-scene.cut .jz-gap{opacity:1}
+.jz-scene.cut .jz-walker{filter:saturate(.4) brightness(.85)}
+.jz-chip{position:absolute;left:50%;top:5%;transform:translateX(-50%);z-index:5;direction:rtl;font-size:clamp(9px,1.7cqw,16px);padding:.35em 1.1em;border-radius:99px;background:rgba(7,36,26,.72);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(6px);white-space:nowrap;transition:background .3s,border-color .3s}
+.jz-scene.cut .jz-chip{background:rgba(120,30,10,.75);border-color:var(--bad)}
+.jz-scene.done .jz-chip{background:rgba(31,122,85,.85);border-color:#6fe0ae}
+/* demo */
+.jz-demo{display:grid;gap:22px;grid-template-columns:1fr;margin-top:30px}
+@media(min-width:980px){.jz-demo{grid-template-columns:1.35fr .65fr;align-items:stretch}}
+.jz-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.jz-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.jz-stats div{background:rgba(0,0,0,.22);border-radius:12px;padding:10px 12px;text-align:center}
+.jz-stats b{display:block;font-family:var(--font-mono);font-size:1.15rem;direction:ltr;color:#fff}
+.jz-stats span{font-size:.76rem;color:rgba(234,244,238,.65)}
+.jz-bar{height:10px;border-radius:99px;background:rgba(255,255,255,.14);overflow:hidden}
+.jz-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g1),var(--gold));border-radius:99px}
+.jz-ctrl{display:flex;gap:8px;flex-wrap:wrap}
+.jz-ctrl button{font-family:var(--font-ar);font-weight:700;font-size:.86rem;padding:9px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;transition:background .2s,transform .2s}
+.jz-ctrl button:hover:not(:disabled){background:rgba(255,255,255,.18);transform:translateY(-1px)}
+.jz-ctrl button:disabled{opacity:.35;cursor:not-allowed}
+.jz-ctrl button.cut{border-color:var(--bad);color:#ffb7a6}
+.jz-ctrl button.go{background:var(--gold);color:#241800;border-color:var(--gold)}
+.jz-log{flex:1;min-height:210px;max-height:300px;overflow:auto;background:#031610;border-radius:12px;padding:12px 14px;font-family:var(--font-mono);font-size:.76rem;line-height:1.9;direction:ltr;text-align:left;color:#BFE8D2}
+.jz-log div{animation:jzIn .3s ease both}
+@keyframes jzIn{from{opacity:0;transform:translateY(4px)}}
+.jz-log .t{color:#5d9a7f}.jz-log .w{color:#ffb37a}.jz-log .k{color:#6fe0ae}
+.jz-emo{font-size:1.5rem;letter-spacing:.3em;direction:ltr;text-align:center}
+/* features */
+.jz-filters{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 26px}
+.jz-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
+.jz-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 20px 20px;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s,opacity .25s;overflow:hidden}
+.jz-card::before{content:"";position:absolute;inset-inline-end:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--g1) 22%,transparent),transparent 70%);transition:transform .4s var(--ease)}
+.jz-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:color-mix(in srgb,var(--g1) 55%,var(--line))}
+.jz-card:hover::before{transform:scale(1.8)}
+.jz-card.hide{display:none}
+.jz-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:color-mix(in srgb,var(--g1) 14%,var(--bg-alt));margin-bottom:12px;position:relative}
+.jz-card h3{margin:0 0 6px;font-size:1.03rem}
+.jz-card p{margin:0;font-size:.92rem;line-height:1.85;position:relative}
+/* bridge divider */
+.jz-bd{position:relative;height:104px;margin:0 auto;max-width:var(--maxw);padding-inline:var(--gutter);overflow:hidden}
+.jz-bd::before{content:"";position:absolute;inset-inline:var(--gutter);bottom:14px;height:0;border-top:3px dashed color-mix(in srgb,var(--g1) 60%,transparent)}
+.jz-bd .m{position:absolute;bottom:16px;width:56px;inset-inline-start:calc(100% - var(--gutter) - 56px);transition:inset-inline-start 3.4s cubic-bezier(.45,.05,.3,1)}
+.jz-bd.in .m{inset-inline-start:var(--gutter)}
+.jz-bd .m svg{width:100%;height:auto;display:block;transform:scaleX(-1)}
+html[dir=ltr] .jz-bd .m{inset-inline-start:var(--gutter)}
+/* room mock */
+.jz-room{display:grid;gap:30px;grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){.jz-room{grid-template-columns:.9fr 1.1fr}}
+.jz-browser{direction:ltr;background:var(--surface);border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.jz-bt{display:flex;align-items:center;gap:7px;padding:10px 12px;background:var(--bg-alt);border-bottom:1px solid var(--line)}
+.jz-bt i{width:10px;height:10px;border-radius:50%;background:#e4894b;display:block}.jz-bt i:nth-child(2){background:#e8c56a}.jz-bt i:nth-child(3){background:#6fb58d}
+.jz-url{flex:1;margin-inline-start:8px;font-family:var(--font-mono);font-size:.72rem;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:4px 12px;color:var(--text-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.jz-bb{padding:16px;direction:rtl;min-height:290px}
+.jz-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.jz-tabs button{font-family:var(--font-ar);font-size:.82rem;font-weight:600;padding:7px 14px;border-radius:99px;border:1px solid var(--line-strong);background:transparent;color:var(--text-soft);cursor:pointer}
+.jz-tabs button[aria-selected=true]{background:var(--g2);border-color:var(--g2);color:#fff}
+.jz-pane{display:none;font-size:.88rem}.jz-pane.on{display:block;animation:jzIn .3s ease both}
+.jz-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--bg)}
+.jz-row b{font-weight:600}.jz-row small{margin-inline-start:auto;color:var(--text-soft);font-family:var(--font-mono);font-size:.7rem;direction:ltr}
+.jz-pin{display:flex;gap:8px;justify-content:center;direction:ltr;margin:6px 0 12px}
+.jz-pin span{width:38px;height:46px;border-radius:10px;border:1px solid var(--line-strong);display:grid;place-items:center;font-family:var(--font-mono);font-weight:700;font-size:1.3rem;background:var(--bg)}
+.jz-steps{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:j}
+.jz-steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;counter-increment:j;color:var(--text-soft)}
+.jz-steps li::before{content:counter(j);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--g2);color:#fff;font-weight:700;font-family:var(--font-mono);font-size:.85rem}
+.jz-steps b{color:var(--text)}
+/* hood */
+.jz-hood{display:grid;gap:26px;grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){.jz-hood{grid-template-columns:1fr 1fr}}
+.jz-term{background:#031610;border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:.8rem;line-height:2;direction:ltr;text-align:left;color:#BFE8D2;overflow:auto;box-shadow:var(--shadow-lg);white-space:pre}
+.jz-term .c{color:#5d9a7f}.jz-term .a{color:var(--gold)}.jz-term .o{color:#6fe0ae}
+/* compare */
+.jz-tw{overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.jz-tw table{width:100%;border-collapse:collapse;min-width:640px;font-size:.92rem}
+.jz-tw th,.jz-tw td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.jz-tw th:first-child,.jz-tw td:first-child{text-align:start;font-weight:600}
+.jz-tw thead th{background:var(--bg-alt);font-family:var(--font-disp)}
+.jz-tw th.me,.jz-tw td.me{background:color-mix(in srgb,var(--g1) 12%,transparent);font-weight:700}
+.jz-tw tr:last-child td{border-bottom:0}
+.y{color:#2e8a5c}.n{color:#c24a32}.m{color:#a88a5f}
+html[data-theme=dark] .y{color:#6fe0ae}html[data-theme=dark] .n{color:#f0806a}
+.jz-q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 18px;margin-top:10px}
+.jz-q summary{cursor:pointer;font-weight:700;padding:13px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.jz-q summary::after{content:"+";color:var(--g2);font-family:var(--font-mono);font-size:1.2rem;transition:transform .2s}
+.jz-q[open] summary::after{transform:rotate(45deg)}
+.jz-q p{margin:0 0 14px;line-height:1.9}
+.jz-final{text-align:center;position:relative;overflow:hidden}
+.jz-final .big{width:clamp(110px,16vw,170px);margin:0 auto 6px}
+.jz-final .big svg{width:100%;height:auto;display:block;overflow:visible}
+.jz-final .big{animation:jzFloat 3.2s ease-in-out infinite}
+@keyframes jzFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.jz-final .jz-cta{justify-content:center}
+.jz-verify{font-family:var(--font-mono);font-size:.72rem;opacity:.7;direction:ltr;word-break:break-all;margin-top:18px}
+@media(prefers-reduced-motion:reduce){.jz *,.jz *::before{animation:none!important}.jz-bd .m{transition:none}}
 </style>
-<section class="jz-hero">
-  <div class="wrap">
+
+<div class="jz">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="jz-mo" viewBox="-24 -2 58 78"><g transform="translate(0,74) scale(1,-1)">
+      <path d="M-12,31L-9.52786,38.6085" fill="none" stroke="#553E2A" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-9.52786,38.6085L-10.5028,46.5488" fill="none" stroke="#553E2A" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-15,31A3,3 0 1 1 -9,31A3,3 0 1 1 -15,31Z" fill="#3F2E1F"/>
+      <path d="M-12.1279,38.6085A2.6,2.6 0 1 1 -6.92786,38.6085A2.6,2.6 0 1 1 -12.1279,38.6085Z" fill="#3F2E1F"/>
+      <path d="M-13.7028,46.5488A3.2,3.2 0 1 1 -7.30282,46.5488A3.2,3.2 0 1 1 -13.7028,46.5488Z" fill="#553E2A"/>
+      <path d="M-12,0H12A6,6 0 0 1 18,6V6A6,6 0 0 1 12,12H-12A6,6 0 0 1 -18,6V6A6,6 0 0 1 -12,0Z" fill="#34363C"/>
+      <path d="M-16.1,6A4.6,4.6 0 1 1 -6.9,6A4.6,4.6 0 1 1 -16.1,6Z" fill="#6A6E78"/>
+      <path d="M-14.8158,7.40191L-8.18418,4.59809" fill="none" stroke="#2A2C31" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-12.9,6A1.4,1.4 0 1 1 -10.1,6A1.4,1.4 0 1 1 -12.9,6Z" fill="#B0B5BE"/>
+      <path d="M-4.6,6A4.6,4.6 0 1 1 4.6,6A4.6,4.6 0 1 1 -4.6,6Z" fill="#6A6E78"/>
+      <path d="M-2.97121,3.96729L2.97121,8.03271" fill="none" stroke="#2A2C31" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-1.4,6A1.4,1.4 0 1 1 1.4,6A1.4,1.4 0 1 1 -1.4,6Z" fill="#B0B5BE"/>
+      <path d="M6.9,6A4.6,4.6 0 1 1 16.1,6A4.6,4.6 0 1 1 6.9,6Z" fill="#6A6E78"/>
+      <path d="M11.6051,2.40154L11.3949,9.59846" fill="none" stroke="#2A2C31" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10.1,6A1.4,1.4 0 1 1 12.9,6A1.4,1.4 0 1 1 10.1,6Z" fill="#B0B5BE"/>
+      <path d="M-3,33H3A1,1 0 0 1 4,34V37A1,1 0 0 1 3,38H-3A1,1 0 0 1 -4,37V34A1,1 0 0 1 -3,33Z" fill="#4A4C52"/>
+      <path d="M-8,11H8A6,6 0 0 1 14,17V29A6,6 0 0 1 8,35H-8A6,6 0 0 1 -14,29V17A6,6 0 0 1 -8,11Z" fill="#6E7448"/>
+      <path d="M-6,15H6A3,3 0 0 1 9,18V27A3,3 0 0 1 6,30H-6A3,3 0 0 1 -9,27V18A3,3 0 0 1 -6,15Z" fill="#F1E3C6"/>
+      <path d="M-6.5,26.5L3,26.5" fill="none" stroke="#6E6A60" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-6.5,22.5L5.5,22.5" fill="none" stroke="#6E6A60" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-6.5,18.5L0,18.5" fill="none" stroke="#6E6A60" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3.2,18.5A1.8,1.8 0 1 1 6.8,18.5A1.8,1.8 0 1 1 3.2,18.5Z" fill="#F08A2C"/>
+      <path d="M0,62L1,70" fill="none" stroke="#55585F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M-2.6,71.5A3.6,3.6 0 1 1 4.6,71.5A3.6,3.6 0 1 1 -2.6,71.5Z" fill="#F08A2C"/>
+      <path d="M-1.2,72.5A1.2,1.2 0 1 1 1.2,72.5A1.2,1.2 0 1 1 -1.2,72.5Z" fill="#FFFFFF" opacity="0.7"/>
+      <path d="M-21,45H-20.5A1.5,1.5 0 0 1 -19,46.5V52.5A1.5,1.5 0 0 1 -20.5,54H-21A1.5,1.5 0 0 1 -22.5,52.5V46.5A1.5,1.5 0 0 1 -21,45Z" fill="#C0B59E"/>
+      <path d="M20.5,45H21A1.5,1.5 0 0 1 22.5,46.5V52.5A1.5,1.5 0 0 1 21,54H20.5A1.5,1.5 0 0 1 19,52.5V46.5A1.5,1.5 0 0 1 20.5,45Z" fill="#C0B59E"/>
+      <path d="M-13,36H13A7,7 0 0 1 20,43V55A7,7 0 0 1 13,62H-13A7,7 0 0 1 -20,55V43A7,7 0 0 1 -13,36Z" fill="#F1E3C6"/>
+      <path d="M-18,36H18A2,2 0 0 1 20,38V38A2,2 0 0 1 18,40H-18A2,2 0 0 1 -20,38V38A2,2 0 0 1 -18,36Z" fill="#D4C7AE"/>
+      <path d="M-11.5,40H11.5A4.5,4.5 0 0 1 16,44.5V53.5A4.5,4.5 0 0 1 11.5,58H-11.5A4.5,4.5 0 0 1 -16,53.5V44.5A4.5,4.5 0 0 1 -11.5,40Z" fill="#262A33"/>
+      <path d="M-6,53L-10.5,49L-6,45" fill="none" stroke="#F7F3E8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>
+      <path d="M-6,53L-10.5,49L-6,45" fill="none" stroke="#F7F3E8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6,53L10.5,49L6,45" fill="none" stroke="#F7F3E8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>
+      <path d="M6,53L10.5,49L6,45" fill="none" stroke="#F7F3E8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1.8,53.5L-1.8,44.5" fill="none" stroke="#F7F3E8" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.18"/>
+      <path d="M1.8,53.5L-1.8,44.5" fill="none" stroke="#F7F3E8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12,31L18.1284,36.1423" fill="none" stroke="#7A5A3C" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18.1284,36.1423L21.5093,43.3928" fill="none" stroke="#7A5A3C" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9,31A3,3 0 1 1 15,31A3,3 0 1 1 9,31Z" fill="#5B432D"/>
+      <path d="M15.5284,36.1423A2.6,2.6 0 1 1 20.7284,36.1423A2.6,2.6 0 1 1 15.5284,36.1423Z" fill="#5B432D"/>
+      <path d="M18.3093,43.3928A3.2,3.2 0 1 1 24.7093,43.3928A3.2,3.2 0 1 1 18.3093,43.3928Z" fill="#7A5A3C"/>
+      <path d="M21.2093,44.3928H29.8093A2.2,2.2 0 0 1 32.0093,46.5928V58.1928A2.2,2.2 0 0 1 29.8093,60.3928H21.2093A2.2,2.2 0 0 1 19.0093,58.1928V46.5928A2.2,2.2 0 0 1 21.2093,44.3928Z" fill="#FFFFFF"/>
+      <path d="M27.6093,60.3928L32.0093,55.8928V60.3928Z" fill="#F0A52A"/>
+      <path d="M22.0093,50.3928L28.5093,50.3928" fill="none" stroke="#C9BFA4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22.0093,53.3928L27.0093,53.3928" fill="none" stroke="#C9BFA4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18.3093,43.3928A3.2,3.2 0 1 1 24.7093,43.3928A3.2,3.2 0 1 1 18.3093,43.3928Z" fill="#7A5A3C"/>
+    </g></symbol></svg>
+
+<section class="jz-dark jz-hero">
+  <div class="wrap jz-hero-grid">
     <div>
       <div class="eyebrow">JISR · جسر</div>
-      <h1 style="font-size:clamp(2rem,5vw,3.2rem)">جسر — شارك ملفاتك بين الأجهزة القريبة، بدون إنترنت</h1>
-      <p class="lead" style="margin-top:14px;max-width:560px">ملفات ومجلدات وصور وفيديو وتطبيقات ونصوص بين الموبايلات، ومن أي آيفون أو كمبيوتر من المتصفح. مشفّر، ومبيبدأش من الأول لو اتقطع.</p>
+      <h1>الملف بيعدّي… <em>مهما كان حجمه</em>، ومن غير نت</h1>
+      <p class="lead" style="margin-top:16px;max-width:560px">جسر بيوصّل موبايلك بأي جهاز جنبك: ملفات ومجلدات وتطبيقات ونصوص. مشفّر، ومبيبدأش من الأول لو الاتصال قطع، ومن غير حساب ولا سيرفر.</p>
       <div class="jz-cta">
-        <a id="jz-dl" class="btn btn-primary jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر مجانًا ⬇</a>
-        <a class="btn btn-outline" href="https://github.com/iegy/Jisr">الكود على GitHub</a>
+        <a id="jz-dl" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر مجانًا ⬇</a>
+        <a class="btn btn-lg jz-ghost" href="#demo">جرّب الجسر بنفسك ↓</a>
       </div>
-      <p class="jz-note" id="jz-ver">أندرويد 9 أو أحدث · مجاني بالكامل · من غير إعلانات ولا حسابات</p>
-      <p class="jz-note">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
+      <div class="jz-pills"><span class="jz-pill">بدون إنترنت</span><span class="jz-pill">بدون حساب</span><span class="jz-pill">مشفّر AES-256</span><span class="jz-pill">ملفات +4GB</span><span class="jz-pill">مجاني</span></div>
+      <p class="jz-note" id="jz-ver">أندرويد 9 أو أحدث · من غير إعلانات ولا تتبّع</p>
     </div>
-    <img class="jz-logo" src="jisr-logo.svg" alt="شعار جسر: الروبوت مو يعبر الجسر شايل ملف" width="340" height="340">
+    <div class="jz-scene" id="heroScene" data-mode="auto" role="img" aria-label="رسم متحرك: الروبوت مو بيعدّي جسر شايل ملف من موبايل لموبايل، والاتصال بيقطع ويكمّل من نفس النقطة">
+      
+<svg class="jz-deco" viewBox="0 0 1000 625" preserveAspectRatio="none" aria-hidden="true">
+  <circle cx="500" cy="60" r="150" fill="#F0A52A" opacity=".05"/>
+  <g fill="#fff"><circle class="jz-star" cx="80" cy="40" r="2.2"/><circle class="jz-star" cx="150" cy="110" r="1.4"/><circle class="jz-star" cx="240" cy="55" r="1.4"/><circle class="jz-star" cx="330" cy="130" r="2.2"/><circle class="jz-star" cx="380" cy="30" r="1.4"/><circle class="jz-star" cx="610" cy="50" r="1.4"/><circle class="jz-star" cx="690" cy="120" r="2.2"/><circle class="jz-star" cx="760" cy="40" r="1.4"/><circle class="jz-star" cx="850" cy="95" r="1.4"/><circle class="jz-star" cx="930" cy="45" r="2.2"/><circle class="jz-star" cx="60" cy="170" r="1.4"/><circle class="jz-star" cx="960" cy="160" r="1.4"/><circle class="jz-star" cx="450" cy="150" r="2.2"/><circle class="jz-star" cx="560" cy="160" r="1.4"/></g>
+  <circle cx="500" cy="92" r="30" fill="#F0A52A"/><circle cx="500" cy="92" r="52" fill="#F0A52A" opacity=".14"/>
+  <path d="M0 430Q120 360 240 405T480 392T740 410T1000 380V625H0Z" fill="#0B3324"/>
+  <path d="M170 412Q500 150 830 412" fill="none" stroke="#F6F3EC" stroke-width="7" stroke-linecap="round"/>
+  <g stroke="#F6F3EC" stroke-width="2" opacity=".55"><line x1="230" y1="369" x2="230" y2="406"/><line x1="280" y1="339" x2="280" y2="406"/><line x1="330" y1="316" x2="330" y2="406"/><line x1="380" y1="298" x2="380" y2="406"/><line x1="430" y1="287" x2="430" y2="406"/><line x1="480" y1="281" x2="480" y2="406"/><line x1="530" y1="282" x2="530" y2="406"/><line x1="580" y1="289" x2="580" y2="406"/><line x1="630" y1="301" x2="630" y2="406"/><line x1="680" y1="320" x2="680" y2="406"/><line x1="730" y1="345" x2="730" y2="406"/></g>
+  <rect x="170" y="410" width="660" height="22" rx="6" fill="#F6F3EC"/><rect x="170" y="405" width="660" height="6" rx="3" fill="#F0A52A"/>
+  <g fill="#D8D1BE"><rect x="250" y="432" width="22" height="70"/><rect x="494" y="432" width="22" height="70"/><rect x="728" y="432" width="22" height="70"/></g>
+  <rect x="0" y="490" width="1000" height="135" fill="#07241A"/>
+  <g class="jz-wave" fill="none" stroke="#2A9468" stroke-width="3" opacity=".55"><path d="M-80 520q20-12 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/><path d="M-60 560q20-12 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0" opacity=".6"/></g>
+</svg>
+<div class="jz-phone s"><div class="bar"><i></i></div><div class="scr"><div class="ico">🎬</div><b data-j="fname">رحلة-الساحل.mp4</b><small data-j="fsize">4.7 GB</small></div></div>
+<div class="jz-phone r"><div class="bar"><i></i></div><div class="scr"><div class="jz-ring" data-j="ring"><span data-j="rpct">0%</span></div><b data-j="rtitle">جاهز للاستقبال</b><small data-j="rsub">جهاز موثوق ✓</small></div></div>
+<div class="jz-lbl s">المُرسِل</div><div class="jz-lbl r">المستقبِل</div>
+<div class="jz-deck" data-j="deck"><span class="jz-gap" data-j="gap"></span>
+  <div class="jz-walker" data-j="walker"><span class="jz-pack" data-j="pack">4.7 GB</span><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></div>
+</div>
+<div class="jz-chip" data-j="chip">جاهز</div>
+
+    </div>
   </div>
 </section>
 
+<section class="section-alt" style="padding-block:34px">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b>0</b><span>إنترنت محتاجه</span></div>
+      <div class="stat"><b>0</b><span>حسابات ولا سيرفرات</span></div>
+      <div class="stat"><b>4GB+</b><span>للملف الواحد</span></div>
+      <div class="stat"><b>256-bit</b><span>تشفير لكل جلسة</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="jz-dark" id="demo">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">TRY IT</div><h2>اقطع الجسر… وشوف اللي هيحصل</h2><p>محاكاة حيّة لنقل فيلم 4.7 جيجا. وقّفه، اقطع الاتصال، وكمّل — جسر بيرجع من آخر بايت.</p></div>
+    <div class="jz-demo">
+      <div>
+        <div class="jz-scene" id="demoScene" data-mode="manual">
+<svg class="jz-deco" viewBox="0 0 1000 625" preserveAspectRatio="none" aria-hidden="true">
+  <circle cx="500" cy="60" r="150" fill="#F0A52A" opacity=".05"/>
+  <g fill="#fff"><circle class="jz-star" cx="80" cy="40" r="2.2"/><circle class="jz-star" cx="150" cy="110" r="1.4"/><circle class="jz-star" cx="240" cy="55" r="1.4"/><circle class="jz-star" cx="330" cy="130" r="2.2"/><circle class="jz-star" cx="380" cy="30" r="1.4"/><circle class="jz-star" cx="610" cy="50" r="1.4"/><circle class="jz-star" cx="690" cy="120" r="2.2"/><circle class="jz-star" cx="760" cy="40" r="1.4"/><circle class="jz-star" cx="850" cy="95" r="1.4"/><circle class="jz-star" cx="930" cy="45" r="2.2"/><circle class="jz-star" cx="60" cy="170" r="1.4"/><circle class="jz-star" cx="960" cy="160" r="1.4"/><circle class="jz-star" cx="450" cy="150" r="2.2"/><circle class="jz-star" cx="560" cy="160" r="1.4"/></g>
+  <circle cx="500" cy="92" r="30" fill="#F0A52A"/><circle cx="500" cy="92" r="52" fill="#F0A52A" opacity=".14"/>
+  <path d="M0 430Q120 360 240 405T480 392T740 410T1000 380V625H0Z" fill="#0B3324"/>
+  <path d="M170 412Q500 150 830 412" fill="none" stroke="#F6F3EC" stroke-width="7" stroke-linecap="round"/>
+  <g stroke="#F6F3EC" stroke-width="2" opacity=".55"><line x1="230" y1="369" x2="230" y2="406"/><line x1="280" y1="339" x2="280" y2="406"/><line x1="330" y1="316" x2="330" y2="406"/><line x1="380" y1="298" x2="380" y2="406"/><line x1="430" y1="287" x2="430" y2="406"/><line x1="480" y1="281" x2="480" y2="406"/><line x1="530" y1="282" x2="530" y2="406"/><line x1="580" y1="289" x2="580" y2="406"/><line x1="630" y1="301" x2="630" y2="406"/><line x1="680" y1="320" x2="680" y2="406"/><line x1="730" y1="345" x2="730" y2="406"/></g>
+  <rect x="170" y="410" width="660" height="22" rx="6" fill="#F6F3EC"/><rect x="170" y="405" width="660" height="6" rx="3" fill="#F0A52A"/>
+  <g fill="#D8D1BE"><rect x="250" y="432" width="22" height="70"/><rect x="494" y="432" width="22" height="70"/><rect x="728" y="432" width="22" height="70"/></g>
+  <rect x="0" y="490" width="1000" height="135" fill="#07241A"/>
+  <g class="jz-wave" fill="none" stroke="#2A9468" stroke-width="3" opacity=".55"><path d="M-80 520q20-12 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/><path d="M-60 560q20-12 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0" opacity=".6"/></g>
+</svg>
+<div class="jz-phone s"><div class="bar"><i></i></div><div class="scr"><div class="ico">🎬</div><b data-j="fname">رحلة-الساحل.mp4</b><small data-j="fsize">4.7 GB</small></div></div>
+<div class="jz-phone r"><div class="bar"><i></i></div><div class="scr"><div class="jz-ring" data-j="ring"><span data-j="rpct">0%</span></div><b data-j="rtitle">جاهز للاستقبال</b><small data-j="rsub">جهاز موثوق ✓</small></div></div>
+<div class="jz-lbl s">المُرسِل</div><div class="jz-lbl r">المستقبِل</div>
+<div class="jz-deck" data-j="deck"><span class="jz-gap" data-j="gap"></span>
+  <div class="jz-walker" data-j="walker"><span class="jz-pack" data-j="pack">4.7 GB</span><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></div>
+</div>
+<div class="jz-chip" data-j="chip">جاهز</div>
+</div>
+      </div>
+      <div class="jz-panel">
+        <div class="jz-emo" id="dEmo" title="رموز التحقق">🔥 🌙 🚀 🐢</div>
+        <div class="jz-bar"><i id="dBar"></i></div>
+        <div class="jz-stats">
+          <div><b id="dPct">0%</b><span>اكتمل</span></div>
+          <div><b id="dSpd">—</b><span>السرعة</span></div>
+          <div><b id="dEta">—</b><span>الباقي</span></div>
+        </div>
+        <div class="jz-ctrl">
+          <button class="go" id="bStart">ابدأ النقل</button>
+          <button id="bPause" disabled>إيقاف مؤقت</button>
+          <button class="cut" id="bCut" disabled>✂ اقطع الاتصال</button>
+          <button id="bCancel" disabled>إلغاء</button>
+        </div>
+        <div class="jz-log" id="dLog" aria-live="polite"></div>
+        <small style="color:rgba(234,244,238,.55)">محاكاة توضيحية بسرعة مُسرَّعة، الأرقام للتوضيح.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jz-bd reveal"><span class="m"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></span></div>
+
 <section>
   <div class="wrap">
-    <div class="section-head reveal"><div class="eyebrow">FEATURES</div><h2>كل اللي تحتاجه لنقل الملفات</h2></div>
-    <div class="jz-grid">
-<article class="jz-card reveal"><span class="jz-ic">📤</span><h3>إرسال بأي حجم</h3><p>ملفات وصور وفيديو وتطبيقات وجهات اتصال ونصوص — حتى أكبر من 4 جيجا ومجلدات بآلاف الملفات.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">🔁</span><h3>مبيبدأش من الأول</h3><p>لو الاتصال قطع، النقل بيرجع لوحده ويكمّل من آخر بايت، حتى لو قفلت التطبيق.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">🔐</span><h3>مشفّر من طرف لطرف</h3><p>ECDH + AES-256-GCM وبصمة لكل ملف. مفيش سيرفر ولا حساب ولا إنترنت.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">🌐</span><h3>غرفة لأي متصفح</h3><p>آيفون أو كمبيوتر؟ افتح غرفة، وهم يدخلوا بمسح رمز: ملفات ونصوص وحافظة مشتركة ومجلد للتصفح.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">📱</span><h3>تغيير الهاتف</h3><p>جهات الاتصال والصور والفيديو والتطبيقات في خطوات بسيطة على الموبايل الجديد.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">💾</span><h3>نسخ احتياطي بدون سحابة</h3><p>بين جهازين، والتاني بيتخطى اللي عنده — كرره براحتك.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">✅</span><h3>أجهزة موثوقة</h3><p>بتتعرّف على جهازك بمفتاح هوية وبتبعت من غير ما تسأل، وبترفض أي منتحل.</p></article>
-<article class="jz-card reveal"><span class="jz-ic">🖼️</span><h3>تصغير الصور (اختياري)</h3><p>صغّر الصور قبل الإرسال لو عايز، والفيديو بيتبعت بأصله دايمًا.</p></article>
+    <div class="section-head reveal"><div class="eyebrow">FEATURES</div><h2>كل اللي محتاجه عشان تنقل أي حاجة، ولأي حد</h2><p>20+ ميزة اتبنت من الصفر على بروتوكول واحد: النقل والأمان والمتصفح وتغيير الموبايل.</p></div>
+    <div class="jz-filters" role="group" aria-label="تصنيف المميزات"><button class="filter" type="button" data-c="all" aria-pressed="true" style="direction:rtl;font-family:var(--font-ar)">الكل</button><button class="filter" type="button" data-c="send" aria-pressed="false" style="direction:rtl;font-family:var(--font-ar)">النقل</button><button class="filter" type="button" data-c="sec" aria-pressed="false" style="direction:rtl;font-family:var(--font-ar)">الأمان</button><button class="filter" type="button" data-c="any" aria-pressed="false" style="direction:rtl;font-family:var(--font-ar)">أي جهاز</button><button class="filter" type="button" data-c="phone" aria-pressed="false" style="direction:rtl;font-family:var(--font-ar)">موبايل جديد</button><button class="filter" type="button" data-c="tidy" aria-pressed="false" style="direction:rtl;font-family:var(--font-ar)">التنظيم</button></div>
+    <div class="jz-grid"><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">📦</div><h3>أي نوع وأي حجم</h3><p>ملفات وصور وفيديو وتطبيقات ومستندات — ومفيش سقف 4 جيجا: الملف الواحد بيعدّي مهما كبر.</p></article><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">🗂️</div><h3>مجلدات بهيكلها</h3><p>اختار مجلد فيه آلاف الملفات وهيوصل بنفس ترتيبه، كسلة واحدة تتبعت مرة واحدة.</p></article><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">🔁</div><h3>مبيبدأش من الأول</h3><p>الاتصال قطع؟ الموبايل اتقفل؟ التطبيق اتقفل؟ النقل يكمّل من آخر بايت وصل، لوحده.</p></article><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">⏱️</div><h3>سرعة ووقت متبقي</h3><p>تشوف السرعة والباقي لحظة بلحظة، وتوقف مؤقت أو تلغي أو تكمّل وقت ما تحب.</p></article><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">📡</div><h3>أكتر من جهاز مرة واحدة</h3><p>ابعت نفس الحاجة لكذا موبايل في نفس الوقت على نفس الشبكة من غير ما تكرر.</p></article><article class="jz-card reveal" data-c="send"><div class="jz-ic" aria-hidden="true">🖼️</div><h3>الجودة بإيدك</h3><p>صغّر الصور قبل الإرسال لو عايز توفر حجم (اختياري)، والفيديو بيتبعت بأصله دايمًا.</p></article><article class="jz-card reveal" data-c="sec"><div class="jz-ic" aria-hidden="true">🔐</div><h3>تشفير من طرف لطرف</h3><p>ECDH P-256 ومفتاح جلسة جديد لكل عملية، وكل إطار مشفّر AES-256-GCM. مفيش سيرفر في النص.</p></article><article class="jz-card reveal" data-c="sec"><div class="jz-ic" aria-hidden="true">🔥</div><h3>تأكد إنه جهازك</h3><p>امسح رمز QR أو قارن أربع رموز تعبيرية على الشاشتين — لو اتطابقت، مفيش حد وسطكم.</p></article><article class="jz-card reveal" data-c="sec"><div class="jz-ic" aria-hidden="true">✅</div><h3>أجهزة موثوقة</h3><p>كل جهاز له مفتاح هوية في Android Keystore. الموثوق بيستقبل منه تلقائي، والمنتحل بيتّرفض.</p></article><article class="jz-card reveal" data-c="sec"><div class="jz-ic" aria-hidden="true">🧬</div><h3>بصمة لكل ملف</h3><p>SHA-256 بيتحسب ويتقارن في الآخر، فلو بايت واحد اتغيّر هتعرف.</p></article><article class="jz-card reveal" data-c="any"><div class="jz-ic" aria-hidden="true">🌐</div><h3>غرفة لأي متصفح</h3><p>آيفون؟ لابتوب؟ تلفزيون؟ افتح غرفة، والباقي يدخل بمسح QR وPIN من غير ما يثبّت حاجة.</p></article><article class="jz-card reveal" data-c="any"><div class="jz-ic" aria-hidden="true">📂</div><h3>مجلد مشترك للقراءة فقط</h3><p>شارك مجلد وخلي الناس تتصفحه وتحمّل منه ملف ملف أو ZIP، ومن غير ما يعدلوا فيه.</p></article><article class="jz-card reveal" data-c="any"><div class="jz-ic" aria-hidden="true">📋</div><h3>حافظة مشتركة</h3><p>انسخ نص على موبايلك والصقه على اللابتوب (وبالعكس) جوه الغرفة، لحظيًا.</p></article><article class="jz-card reveal" data-c="any"><div class="jz-ic" aria-hidden="true">💬</div><h3>نصوص وروابط سريعة</h3><p>ابعت لينك أو رقم أو كلمة سر من غير ما تعمل ملف، ويتفتح بضغطة.</p></article><article class="jz-card reveal" data-c="any"><div class="jz-ic" aria-hidden="true">👥</div><h3>غرف وأعضاء</h3><p>تتحكم فيمن يدخل: موافقة يدوية، طرد، وقف الرفع أو التحميل، ومدة تنتهي لوحدها.</p></article><article class="jz-card reveal" data-c="phone"><div class="jz-ic" aria-hidden="true">📱</div><h3>موبايل جديد في خطوات</h3><p>جهات الاتصال والصور والفيديو والتطبيقات تنتقل للموبايل الجديد من غير كابلات ولا سحابة.</p></article><article class="jz-card reveal" data-c="phone"><div class="jz-ic" aria-hidden="true">💾</div><h3>نسخ احتياطي بين جهازين</h3><p>نسخة محلية على موبايل تاني، والجهاز التاني بيتخطى اللي عنده — كرره براحتك.</p></article><article class="jz-card reveal" data-c="tidy"><div class="jz-ic" aria-hidden="true">🧾</div><h3>سجل بكل حاجة</h3><p>اللي اتبعت واللي اتستقبل، ولمين، وامتى، ونجح ولا لأ — وتعيد الإرسال من السجل.</p></article><article class="jz-card reveal" data-c="tidy"><div class="jz-ic" aria-hidden="true">🌗</div><h3>عربي وإنجليزي، فاتح وداكن</h3><p>الواجهة كلها بتتحوّل بحرية، من اليمين لليسار وبالعكس.</p></article><article class="jz-card reveal" data-c="tidy"><div class="jz-ic" aria-hidden="true">🔄</div><h3>تحديث من جوه التطبيق</h3><p>بيتشيك على إصدار جديد ويتحقق من بصمته قبل ما يتثبّت.</p></article><article class="jz-card reveal" data-c="tidy"><div class="jz-ic" aria-hidden="true">🛡️</div><h3>متوافق مع حصن</h3><p>جسر وحصن بيتكلموا نفس اللغة، فتبعت من واحد للتاني عادي.</p></article></div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap jz-room">
+    <div>
+      <div class="eyebrow">WEB ROOM</div>
+      <h2 class="reveal">آيفون أو لابتوب؟ مفيش مشكلة — الغرفة بتتفتح في المتصفح</h2>
+      <p class="lead reveal" style="margin-top:12px">من التطبيق افتح «غرفة مشاركة»، وأي جهاز بمتصفح يدخلها من غير ما يثبّت أي حاجة. الغرفة مؤقتة وبتتقفل لوحدها.</p>
+      <ol class="jz-steps">
+        <li><span><b>افتح الغرفة</b> واختار مدتها، وحط PIN لو عايز.</span></li>
+        <li><span><b>الطرف التاني يمسح الـ QR</b> أو يكتب العنوان في المتصفح.</span></li>
+        <li><span><b>وافق على دخوله</b>، وابدأ شارك: ملفات، نصوص، حافظة، مجلد للتصفح.</span></li>
+      </ol>
+    </div>
+    <div class="jz-browser reveal" id="roomMock">
+      <div class="jz-bt"><i></i><i></i><i></i><span class="jz-url">http://192.168.43.1:8080 · جسر</span></div>
+      <div class="jz-bb">
+        <div class="jz-tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-t="feed">الخلاصة</button>
+          <button role="tab" aria-selected="false" data-t="folder">المجلد</button>
+          <button role="tab" aria-selected="false" data-t="clip">الحافظة</button>
+          <button role="tab" aria-selected="false" data-t="people">الأعضاء</button>
+        </div>
+        <div class="jz-pane on" data-p="feed">
+          <div class="jz-row">📄 <b>عقد-الإيجار.pdf</b><small>2.4 MB</small></div>
+          <div class="jz-row">🎬 <b>رحلة-الساحل.mp4</b><small>1.8 GB</small></div>
+          <div class="jz-row">💬 <b>الباسورد: ••••••</b><small>نص</small></div>
+        </div>
+        <div class="jz-pane" data-p="folder">
+          <div class="jz-row">📁 <b>صور الشغل</b><small>412 ملف</small></div>
+          <div class="jz-row">📁 <b>مستندات</b><small>38 ملف</small></div>
+          <div class="jz-row">🗜️ <b>تحميل المجلد كله ZIP</b><small>قراءة فقط</small></div>
+        </div>
+        <div class="jz-pane" data-p="clip">
+          <div class="jz-row">📋 <b>https://iegy.net/jisr</b><small>من الموبايل</small></div>
+          <div class="jz-row">📋 <b>اجتماع 5 المغرب</b><small>من اللابتوب</small></div>
+        </div>
+        <div class="jz-pane" data-p="people">
+          <div class="jz-row">💻 <b>لابتوب سارة</b><small>متصل</small></div>
+          <div class="jz-row">📱 <b>آيفون كريم</b><small>متصل</small></div>
+          <div class="jz-row">⏳ <b>طلب دخول جديد</b><small>وافق · ارفض</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jz-bd reveal"><span class="m"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></span></div>
+
+<section>
+  <div class="wrap jz-hood">
+    <div>
+      <div class="eyebrow">UNDER THE HOOD</div>
+      <h2 class="reveal">جوه الجسر: أمان بيتبني بالمفاتيح، مش بالوعود</h2>
+      <p class="lead reveal" style="margin-top:12px">ملفاتك مبتعدّيش على أي سيرفر. الجهازين بيتفقوا على مفتاح بينهم، والتشفير بيحصل على الموبايل قبل ما أول بايت يتحرك.</p>
+    </div>
+    <div class="jz-term reveal"><span class="c"># 1) QR / emoji → verify peer</span>
+<span class="a">ticket</span> = HISNJISR1:&lt;ip, port, secret&gt;
+<span class="c"># 2) key agreement</span>
+<span class="a">shared</span> = ECDH(P-256, mine, theirs)
+<span class="a">key</span>    = HKDF-SHA256(shared, ticket)
+<span class="c"># 3) every frame</span>
+<span class="a">frame</span>  = AES-256-GCM(key, nonce++, chunk)
+<span class="c"># 4) every file</span>
+<span class="a">sha256</span> = hash(file) <span class="o">== peer.sha256 ✓</span>
+<span class="c"># 5) resume</span>
+<span class="a">offset</span> = ledger[transferId]  <span class="o">→ continue</span></div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">COMPARE</div><h2>ليه جسر مش طريقة تانية؟</h2></div>
+    <div class="jz-tw reveal">
+      <table>
+        <thead><tr><th></th><th class="me">جسر</th><th>بلوتوث</th><th>تطبيقات الرسائل</th><th>السحابة</th></tr></thead>
+        <tbody>
+          <tr><td>محتاج إنترنت؟</td><td class="me y">لا</td><td class="y">لا</td><td class="n">أيوه</td><td class="n">أيوه</td></tr>
+          <tr><td>ملفات كبيرة جدًا</td><td class="me y">أكتر من 4GB</td><td class="m">بطيء جدًا</td><td class="n">حد أقصى</td><td class="m">حسب المساحة</td></tr>
+          <tr><td>جودة الصور والفيديو</td><td class="me y">أصلية</td><td class="y">أصلية</td><td class="n">غالبًا مضغوطة</td><td class="y">أصلية</td></tr>
+          <tr><td>يكمّل لو اتقطع</td><td class="me y">أيوه</td><td class="n">غالبًا لأ</td><td class="m">بيختلف</td><td class="m">بيختلف</td></tr>
+          <tr><td>الخصوصية</td><td class="me y">بين جهازين بس</td><td class="y">بين جهازين</td><td class="m">عبر سيرفر</td><td class="n">على سيرفر</td></tr>
+          <tr><td>أي جهاز بمتصفح</td><td class="me y">أيوه (الغرفة)</td><td class="n">لأ</td><td class="y">أيوه</td><td class="y">أيوه</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -150,31 +491,151 @@
 <section>
   <div class="wrap">
     <div class="section-head reveal"><div class="eyebrow">HOW IT WORKS</div><h2>تبعت في ثلاث خطوات</h2></div>
-    <div class="jz-steps">
-      <div class="jz-step reveal"><b>على الجهاز المستقبل</b><p>افتح «استقبال» — هيظهر رمز QR، وكمان بيظهر تلقائيًا للأجهزة القريبة.</p></div>
-      <div class="jz-step reveal"><b>على الجهاز المرسل</b><p>اختار الملفات أو المجلد، وامسح الرمز أو اختار الجهاز من القايمة.</p></div>
-      <div class="jz-step reveal"><b>وافق وخلاص</b><p>المستقبل بيوافق (أو الجهاز الموثوق بيدخل على طول) والنقل يبدأ، وبيكمّل لو اتقطع.</p></div>
+    <div class="grid-3 stagger reveal">
+      <div class="card"><div class="num">01</div><h3>افتح «استقبال»</h3><p>الجهاز المستقبل بيعرض رمز QR، وبيظهر كمان تلقائيًا للأجهزة اللي جنبه.</p></div>
+      <div class="card"><div class="num">02</div><h3>اختار وامسح</h3><p>من الجهاز المرسل اختار الملفات أو المجلد، وامسح الرمز أو اختار الجهاز من القايمة.</p></div>
+      <div class="card"><div class="num">03</div><h3>وافق وخلاص</h3><p>المستقبل بيوافق (أو الجهاز الموثوق بيدخل على طول) والنقل يبدأ، وبيكمّل لو اتقطع.</p></div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
+<section class="section-alt">
+  <div class="wrap" style="max-width:820px">
     <div class="section-head reveal"><div class="eyebrow">FAQ</div><h2>أسئلة بتتسأل</h2></div>
-<details class="jz-q reveal"><summary>محتاج إنترنت؟</summary><p>لا. جسر بيشتغل على نفس الواي فاي، أو بيعمل شبكة واي فاي خاصة بين الجهازين من غير راوتر ولا باقة.</p></details>
-<details class="jz-q reveal"><summary>أبعت لآيفون أو كمبيوتر؟</summary><p>أيوه، من «غرفة مشاركة»: بتفتح صفحة مؤقتة على موبايلك والطرف التاني بيدخلها من المتصفح من غير ما يثبّت حاجة.</p></details>
-<details class="jz-q reveal"><summary>بيتوافق مع حصن؟</summary><p>أيوه، جسر وحصن بيتبادلوا الملفات مع بعض.</p></details>
-<details class="jz-q reveal"><summary>فين بتتحفظ الملفات؟</summary><p>في مجلد Download/Jisr على الموبايل، والنسخ الاحتياطي في Download/Jisr Backup.</p></details>
-<details class="jz-q reveal"><summary>آمن ولا لأ؟</summary><p>كل جلسة مشفّرة، وكل ملف بيتتحقق منه ببصمة SHA-256، والتحقق من الطرف التاني برمز QR أو أربع رموز تعبيرية، والأجهزة الموثوقة بتتعرّف بمفتاح هوية. والكود مفتوح على GitHub.</p></details>
-    <p style="margin-top:34px"><a class="link-out" href="work-jisr.html">قصة بناء جسر ←</a></p>
+    <details class="jz-q reveal"><summary>محتاج إنترنت؟</summary><p>لا. جسر بيشتغل على نفس الواي فاي، أو بيعمل شبكة واي فاي خاصة بين الجهازين من غير راوتر ولا باقة. الإنترنت محتاجه بس وقت التحميل أو التحديث.</p></details><details class="jz-q reveal"><summary>أبعت لآيفون أو كمبيوتر؟</summary><p>أيوه، من «غرفة مشاركة»: بتفتح صفحة مؤقتة على موبايلك والطرف التاني بيدخلها من أي متصفح من غير ما يثبّت حاجة. التطبيق نفسه أندرويد.</p></details><details class="jz-q reveal"><summary>فيه حد أقصى لحجم الملف؟</summary><p>لأ. الملفات الأكبر من 4 جيجا ماشية، والمجلدات الكبيرة كمان. بس لازم مكان فاضي على الجهاز المستقبل، والتطبيق بيتشيك على ده قبل ما يبدأ.</p></details><details class="jz-q reveal"><summary>لو النت أو الاتصال قطع في النص؟</summary><p>النقل بيكمّل من آخر بايت وصل، لوحده أو بضغطة، وحتى لو قفلت التطبيق. ده من أساس التصميم، مش ميزة إضافية.</p></details><details class="jz-q reveal"><summary>آمن ولا لأ؟</summary><p>كل جلسة مشفّرة من طرف لطرف، وكل ملف بيتتحقق منه ببصمة SHA-256، والتحقق من الطرف التاني برمز QR أو أربع رموز تعبيرية، والأجهزة الموثوقة بتتعرّف بمفتاح هوية. مفيش حسابات ولا سيرفرات بتشوف ملفاتك.</p></details><details class="jz-q reveal"><summary>فين بتتحفظ الملفات؟</summary><p>في مجلد Download/Jisr على الموبايل، والنسخ الاحتياطي في Download/Jisr Backup.</p></details><details class="jz-q reveal"><summary>بيتوافق مع حصن؟</summary><p>أيوه، جسر وحصن بيتبادلوا الملفات مع بعض.</p></details><details class="jz-q reveal"><summary>ليه التثبيت بيسأل عن «مصدر غير معروف»؟</summary><p>لأن التطبيق بيتحمّل من الموقع مباشرة مش من متجر. الـ APK موقّع، وبصمته منشورة في ملف version.json وقدامك على صفحة الإصدار في GitHub.</p></details>
+    <p style="margin-top:30px"><a class="link-out" href="work-jisr.html">قصة بناء جسر ←</a></p>
   </div>
 </section>
+
+<section class="jz-dark jz-final">
+  <div class="wrap">
+    <div class="big"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></div>
+    <h2 class="reveal">يلا نعدّي؟</h2>
+    <p class="lead reveal" style="margin:10px auto 0;max-width:520px">حمّل جسر وانقل أول ملف في دقيقة. مجاني، من غير إعلانات، ومن غير ما تسجّل.</p>
+    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a></div>
+    <p class="jz-note" id="jz-ver2">أندرويد 9 أو أحدث</p>
+    <p class="jz-note" style="max-width:560px;margin-inline:auto">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
+    <p class="jz-verify" id="jz-sha"></p>
+  </div>
+</section>
+</div>
+
 <script>
-fetch("https://raw.githubusercontent.com/iegy/Jisr/main/version.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
-  if(!j||!j.versionName)return;
-  var mb=j.size?(j.size/1048576).toFixed(1).replace(/\.0$/,"")+" ميجا · ":"";
-  document.getElementById("jz-ver").textContent="الإصدار "+j.versionName+" · "+mb+"أندرويد 9 أو أحدث · مجاني بالكامل";
-}).catch(function(){});
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* ---------- transfer simulator ---------- */
+  var TOTAL=4.7*1024*1024*1024, SECS=15;
+  function fmt(b){return b>=1073741824?(b/1073741824).toFixed(2)+' GB':b>=1048576?(b/1048576).toFixed(0)+' MB':(b/1024).toFixed(0)+' KB'}
+  function mmss(s){s=Math.max(0,Math.round(s));var m=Math.floor(s/60),x=s%60;return m+':'+(x<10?'0':'')+x}
+  function Sim(root,o){
+    var q=function(k){return root.querySelector('[data-j="'+k+'"]')};
+    var S={p:0,state:'idle',spd:0,cutDone:false,t:0,wait:0};
+    var el={walker:q('walker'),deck:q('deck'),gap:q('gap'),chip:q('chip'),ring:q('ring'),rpct:q('rpct'),rtitle:q('rtitle'),rsub:q('rsub'),pack:q('pack')};
+    o=o||{};
+    function pos(){var x=94-S.p*88;el.walker.style.left=x+'%';el.gap.style.left=x+'%'}
+    function paint(){
+      pos();var pc=Math.round(S.p*100);
+      el.ring.style.setProperty('--p',pc);el.rpct.textContent=pc+'%';
+      root.classList.toggle('cut',S.state==='cut');root.classList.toggle('done',S.state==='done');
+      el.walker.classList.toggle('go',S.state==='run');
+      var chip={idle:'جاهز',run:'بيتنقل…',pause:'إيقاف مؤقت ⏸',cut:'الاتصال قطع ⚡',done:'وصل ✓ البصمة مطابقة',cancel:'اتلغى'}[S.state];
+      el.chip.textContent=chip;
+      el.rtitle.textContent={idle:'جاهز للاستقبال',run:'بيستقبل…',pause:'متوقف',cut:'مستني الاتصال',done:'اكتمل',cancel:'اتلغى'}[S.state];
+      el.rsub.textContent=S.state==='cut'?'محفوظ عند '+fmt(S.p*TOTAL):S.state==='done'?'SHA-256 ✓':'جهاز موثوق ✓';
+      if(o.onPaint)o.onPaint(S);
+    }
+    function loop(ts){
+      if(!S.last)S.last=ts;var dt=Math.min(.1,(ts-S.last)/1000);S.last=ts;
+      if(S.state==='run'){
+        S.spd+=((34+Math.sin(ts/700)*6+Math.random()*3)-S.spd)*.08;
+        S.p=Math.min(1,S.p+dt/SECS);
+        if(o.auto&&!S.cutDone&&S.p>=.5){S.cutDone=true;api.cut()}
+        if(S.p>=1){S.p=1;S.state='done';S.spd=0;if(o.onDone)o.onDone(S);if(o.auto)S.wait=3.2}
+        paint();
+      }else if(S.state==='cut'&&o.auto){S.wait-=dt;if(S.wait<=0)api.resume()}
+      else if(S.state==='done'&&o.auto){S.wait-=dt;if(S.wait<=0)api.reset(true)}
+      else if(S.state==='idle'&&o.auto&&S.wait>0){S.wait-=dt;if(S.wait<=0)api.start()}
+      requestAnimationFrame(loop);
+    }
+    var api={
+      S:S,
+      start:function(){if(S.state==='run')return;S.state='run';if(o.onEvent)o.onEvent('start');paint()},
+      pause:function(){if(S.state==='run'){S.state='pause';if(o.onEvent)o.onEvent('pause');paint()}else if(S.state==='pause'){S.state='run';if(o.onEvent)o.onEvent('resume');paint()}},
+      cut:function(){if(S.state!=='run'&&S.state!=='pause')return;S.state='cut';S.spd=0;S.wait=2.6;if(o.onEvent)o.onEvent('cut');paint()},
+      resume:function(){if(S.state!=='cut')return;S.state='run';if(o.onEvent)o.onEvent('reconnect');paint()},
+      cancel:function(){if(S.state==='idle'||S.state==='done')return;S.state='cancel';S.spd=0;if(o.onEvent)o.onEvent('cancel');paint()},
+      reset:function(autoRun){S.p=0;S.state='idle';S.cutDone=false;S.spd=0;S.wait=autoRun?1:0;if(o.onEvent)o.onEvent('reset');paint()}
+    };
+    el.pack.textContent=fmt(TOTAL);
+    paint();
+    if(!reduce)requestAnimationFrame(loop);else{S.p=.5;paint()}
+    if(o.auto){S.wait=1.2}
+    return api;
+  }
+  /* hero: auto loop */
+  var hero=document.getElementById('heroScene');
+  if(hero)Sim(hero,{auto:true});
+  /* demo: manual */
+  var demo=document.getElementById('demoScene');
+  if(demo){
+    var $=function(i){return document.getElementById(i)};
+    var log=$('dLog'),bar=$('dBar'),pct=$('dPct'),spd=$('dSpd'),eta=$('dEta'),
+        bS=$('bStart'),bP=$('bPause'),bC=$('bCut'),bX=$('bCancel');
+    var emoji=['🔥 🌙 🚀 🐢','🦊 🍉 ⚡ 🎯','🐙 🌵 🎈 🧭'],k=0;
+    function L(txt,cls){var d=document.createElement('div');d.innerHTML=(cls?'<span class="'+cls+'">':'')+txt+(cls?'</span>':'');log.appendChild(d);log.scrollTop=log.scrollHeight}
+    function now(){var d=new Date();return '<span class="t">'+d.toTimeString().slice(0,8)+'</span> '}
+    var sim=Sim(demo,{
+      onPaint:function(S){
+        bar.style.width=(S.p*100)+'%';pct.textContent=Math.round(S.p*100)+'%';
+        var run=S.state==='run';
+        spd.textContent=run?(S.spd.toFixed(0)+' MB/s'):'—';
+        eta.textContent=run&&S.spd>1?mmss((1-S.p)*TOTAL/1048576/S.spd):'—';
+        bS.disabled=!(S.state==='idle'||S.state==='cancel'||S.state==='done'||S.state==='cut');
+        bS.textContent=S.state==='cut'?'كمّل من نفس النقطة':(S.state==='done'||S.state==='cancel')?'ابدأ من جديد':'ابدأ النقل';
+        bP.disabled=!(S.state==='run'||S.state==='pause');bP.textContent=S.state==='pause'?'كمّل':'إيقاف مؤقت';
+        bC.disabled=!(S.state==='run'||S.state==='pause');
+        bX.disabled=!(S.state==='run'||S.state==='pause'||S.state==='cut');
+      },
+      onEvent:function(e){
+        var o=Math.round(sim.S.p*TOTAL);
+        if(e==='start'){$('dEmo').textContent=emoji[k++%3];L(now()+'اتصال مع المستقبل — التشفير تمام (ECDH P-256 ← AES-256-GCM)','k');L(now()+'بدأ إرسال: رحلة-الساحل.mp4 · '+fmt(TOTAL))}
+        if(e==='pause')L(now()+'إيقاف مؤقت عند '+fmt(o),'w');
+        if(e==='resume')L(now()+'كمّل من '+fmt(o));
+        if(e==='cut')L(now()+'⚡ الاتصال قطع عند '+fmt(o)+' — الباقي محفوظ، مفيش بداية من الأول','w');
+        if(e==='reconnect')L(now()+'رجع الاتصال ← استئناف من offset='+o+' بايت','k');
+        if(e==='cancel')L(now()+'اتلغى النقل','w');
+        if(e==='reset'&&sim.S.state==='idle'){}
+      },
+      onDone:function(){L(now()+'اكتمل ✓ SHA-256 مطابق، الملف اتحفظ في Download/Jisr','k')}
+    });
+    L('<span class="t">//</span> اضغط «ابدأ النقل»، وبعد ما يمشي جرّب «اقطع الاتصال».');
+    bS.onclick=function(){var S=sim.S;if(S.state==='cut')sim.resume();else{if(S.state==='done'||S.state==='cancel')sim.reset();sim.start()}};
+    bP.onclick=function(){sim.pause()};
+    bC.onclick=function(){sim.cut()};
+    bX.onclick=function(){sim.cancel()};
+  }
+  /* ---------- feature filters ---------- */
+  var fl=document.querySelectorAll('.jz-filters .filter'),cards=document.querySelectorAll('.jz-card');
+  fl.forEach(function(b){b.addEventListener('click',function(){
+    fl.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    var c=b.getAttribute('data-c');cards.forEach(function(el){el.classList.toggle('hide',c!=='all'&&el.getAttribute('data-c')!==c)});
+  })});
+  /* ---------- room tabs ---------- */
+  var tabs=document.querySelectorAll('#roomMock .jz-tabs button'),panes=document.querySelectorAll('#roomMock .jz-pane');
+  tabs.forEach(function(b){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===b?'true':'false')});
+    panes.forEach(function(p){p.classList.toggle('on',p.getAttribute('data-p')===b.getAttribute('data-t'))});
+  })});
+  /* ---------- version from GitHub ---------- */
+  fetch("https://raw.githubusercontent.com/iegy/Jisr/main/version.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
+    if(!j||!j.versionName)return;
+    var mb=j.size?(j.size/1048576).toFixed(1).replace(/\.0$/,"")+" ميجا · ":"";
+    var t="الإصدار "+j.versionName+" · "+mb+"أندرويد 9 أو أحدث";
+    var a=document.getElementById("jz-ver"),b=document.getElementById("jz-ver2");
+    if(a)a.textContent=t+" · من غير إعلانات";if(b)b.textContent=t;
+    if(j.sha256){var s=document.getElementById("jz-sha");if(s)s.textContent="SHA-256: "+j.sha256}
+  }).catch(function(){});
+})();
 </script>
 
 </main>
