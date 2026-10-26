@@ -26,7 +26,7 @@ FEATS = [
  ("tidy", "🧾", "سجل بكل حاجة", "اللي اتبعت واللي اتستقبل، ولمين، وامتى، ونجح ولا لأ — وتعيد الإرسال من السجل."),
  ("tidy", "🌗", "عربي وإنجليزي، فاتح وداكن", "الواجهة كلها بتتحوّل بحرية، من اليمين لليسار وبالعكس."),
  ("tidy", "🔄", "تحديث من جوه التطبيق", "بيتشيك على إصدار جديد ويتحقق من بصمته قبل ما يتثبّت."),
- ("tidy", "🛡️", "متوافق مع حصن", "جسر وحصن بيتكلموا نفس اللغة، فتبعت من واحد للتاني عادي."),
+ ("tidy", "🛡️", "متوافق مع حصن", "جسر وحصن بيتكلموا نفس اللغة، فتبعت من واحد للتاني عادي. وحصن متصفح بيحجب الإعلانات: iegy.net/H"),
 ]
 
 CATS = [("all", "الكل"), ("send", "النقل"), ("sec", "الأمان"), ("any", "أي جهاز"), ("phone", "موبايل جديد"), ("tidy", "التنظيم")]
@@ -38,7 +38,7 @@ FAQ = [
  ("لو النت أو الاتصال قطع في النص؟", "النقل بيكمّل من آخر بايت وصل، لوحده أو بضغطة، وحتى لو قفلت التطبيق. ده من أساس التصميم، مش ميزة إضافية."),
  ("آمن ولا لأ؟", "كل جلسة مشفّرة من طرف لطرف، وكل ملف بيتتحقق منه ببصمة SHA-256، والتحقق من الطرف التاني برمز QR أو أربع رموز تعبيرية، والأجهزة الموثوقة بتتعرّف بمفتاح هوية. مفيش حسابات ولا سيرفرات بتشوف ملفاتك."),
  ("فين بتتحفظ الملفات؟", "في مجلد Download/Jisr على الموبايل، والنسخ الاحتياطي في Download/Jisr Backup."),
- ("بيتوافق مع حصن؟", "أيوه، جسر وحصن بيتبادلوا الملفات مع بعض."),
+ ("بيتوافق مع حصن؟", "أيوه، جسر وحصن بيتبادلوا الملفات مع بعض. وحصن متصفحي اللي بيحجب الإعلانات ويحمّل الفيديو، وفيه جسر جواه: <a href=\"https://iegy.net/H/\">iegy.net/H</a>."),
  ("ليه التثبيت بيسأل عن «مصدر غير معروف»؟", "لأن التطبيق بيتحمّل من الموقع مباشرة مش من متجر. الـ APK موقّع، وبصمته منشورة في ملف version.json وقدامك على صفحة الإصدار في GitHub."),
 ]
 
@@ -381,7 +381,7 @@ BODY = r"""
     <div class="big"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></div>
     <h2 class="reveal">يلا نعدّي؟</h2>
     <p class="lead reveal" style="margin:10px auto 0;max-width:520px">حمّل جسر وانقل أول ملف في دقيقة. مجاني، من غير إعلانات، ومن غير ما تسجّل.</p>
-    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a><a class="btn btn-lg jz-ghost" href="jisr-privacy.html">سياسة الخصوصية</a></div>
+    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a><a class="btn btn-lg jz-ghost" href="jisr-privacy.html">سياسة الخصوصية</a><a class="btn btn-lg jz-ghost" href="https://iegy.net/H/">جرّب حصن</a></div>
     <p class="jz-note" id="jz-ver2">أندرويد 9 أو أحدث</p>
     <p class="jz-note" style="max-width:560px;margin-inline:auto">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
     <p class="jz-verify" id="jz-sha"></p>
