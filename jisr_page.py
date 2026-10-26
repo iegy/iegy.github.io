@@ -72,6 +72,8 @@ CSS = r"""
 .jz-qrbox{width:112px;height:112px;padding:6px;background:#fff;border-radius:12px;flex:none}
 .jz-qrbox svg{width:100%;height:100%;display:block}
 @media (hover:hover) and (pointer:fine) and (min-width:900px){.jz-qr{display:flex}}
+.jz-win{margin-top:14px;font-size:.95rem}
+.jz-win a{color:#ffd58a;text-decoration:underline;text-underline-offset:4px}
 .jz-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .jz-pill{font-family:var(--font-mono);font-size:.74rem;padding:6px 13px;border:1px solid rgba(255,255,255,.22);border-radius:99px;color:#EAF4EE;background:rgba(255,255,255,.06);direction:rtl}
 .jz-note{font-size:.86rem;margin-top:14px;opacity:.85}
@@ -213,6 +215,7 @@ BODY = r"""
         <a id="jz-dl" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر مجانًا ⬇</a>
         <a class="btn btn-lg jz-ghost" href="#demo">جرّب الجسر بنفسك ↓</a>
       </div>
+      <p class="jz-win"><a id="jz-win" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr-Windows.zip" download>🖥️ حمّل نسخة الويندوز (بدون تثبيت)</a></p>
       <div class="jz-qr"><div class="jz-qrbox">__QR__</div><div><b>على الكمبيوتر؟</b><br>صوّر الكود بموبايلك وحمّل جسر مباشرة.</div></div>
       <div class="jz-pills"><span class="jz-pill">بدون إنترنت</span><span class="jz-pill">بدون حساب</span><span class="jz-pill">مشفّر AES-256</span><span class="jz-pill">ملفات +4GB</span><span class="jz-pill">مجاني</span></div>
       <p class="jz-note" id="jz-ver">أندرويد 9 أو أحدث · من غير إعلانات ولا تتبّع</p>
@@ -383,7 +386,7 @@ BODY = r"""
     <div class="big"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></div>
     <h2 class="reveal">يلا نعدّي؟</h2>
     <p class="lead reveal" style="margin:10px auto 0;max-width:520px">حمّل جسر وانقل أول ملف في دقيقة. مجاني، من غير إعلانات، ومن غير ما تسجّل.</p>
-    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a><a class="btn btn-lg jz-ghost" href="jisr-privacy.html">سياسة الخصوصية</a><a class="btn btn-lg jz-ghost" href="https://iegy.net/H/">جرّب حصن</a></div>
+    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr-Windows.zip" download>🖥️ نسخة الويندوز</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a><a class="btn btn-lg jz-ghost" href="jisr-privacy.html">سياسة الخصوصية</a><a class="btn btn-lg jz-ghost" href="https://iegy.net/H/">جرّب حصن</a></div>
     <p class="jz-note" id="jz-ver2">أندرويد 9 أو أحدث</p>
     <p class="jz-note" style="max-width:560px;margin-inline:auto">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
     <p class="jz-verify" id="jz-sha"></p>
