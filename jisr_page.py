@@ -47,7 +47,7 @@ CSS = r"""
 .jz{--g1:#2A9468;--g2:#1F7A55;--g3:#0E3B2A;--g4:#07241A;--gold:#F0A52A;--ivory:#F6F3EC;--bad:#ff7a59}
 .jz section{padding-block:clamp(54px,8vw,96px)}
 .jz .eyebrow{color:var(--g2)}html[data-theme=dark] .jz .eyebrow{color:var(--g1)}
-.jz svg[viewBox='-24 -2 58 78']{aspect-ratio:58/78}
+.jz svg[viewBox="0 0 58 78"]{aspect-ratio:58/78}
 .jz-dark{background:radial-gradient(1200px 600px at 80% -10%,#14583f 0,transparent 60%),linear-gradient(180deg,var(--g4),var(--g3));color:#EAF4EE}
 .jz-dark p,.jz-dark .lead{color:rgba(234,244,238,.78)}
 .jz-dark h1,.jz-dark h2,.jz-dark h3{color:#fff}
@@ -255,7 +255,7 @@ BODY = r"""
   </div>
 </section>
 
-<div class="jz-bd reveal"><span class="m"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></span></div>
+<div class="jz-bd reveal"><span class="m"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></span></div>
 
 <section>
   <div class="wrap">
@@ -310,7 +310,7 @@ BODY = r"""
   </div>
 </section>
 
-<div class="jz-bd reveal"><span class="m"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></span></div>
+<div class="jz-bd reveal"><span class="m"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></span></div>
 
 <section>
   <div class="wrap jz-hood">
@@ -373,7 +373,7 @@ BODY = r"""
 
 <section class="jz-dark jz-final">
   <div class="wrap">
-    <div class="big"><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></div>
+    <div class="big"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></div>
     <h2 class="reveal">يلا نعدّي؟</h2>
     <p class="lead reveal" style="margin:10px auto 0;max-width:520px">حمّل جسر وانقل أول ملف في دقيقة. مجاني، من غير إعلانات، ومن غير ما تسجّل.</p>
     <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a></div>
@@ -402,7 +402,7 @@ SCENE = r"""
 <div class="jz-phone r"><div class="bar"><i></i></div><div class="scr"><div class="jz-ring" data-j="ring"><span data-j="rpct">0%</span></div><b data-j="rtitle">جاهز للاستقبال</b><small data-j="rsub">جهاز موثوق ✓</small></div></div>
 <div class="jz-lbl s">المُرسِل</div><div class="jz-lbl r">المستقبِل</div>
 <div class="jz-deck" data-j="deck"><span class="jz-gap" data-j="gap"></span>
-  <div class="jz-walker" data-j="walker"><span class="jz-pack" data-j="pack">4.7 GB</span><svg viewBox="-24 -2 58 78"><use href="#jz-mo"/></svg></div>
+  <div class="jz-walker" data-j="walker"><span class="jz-pack" data-j="pack">4.7 GB</span><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></div>
 </div>
 <div class="jz-chip" data-j="chip">جاهز</div>
 """
