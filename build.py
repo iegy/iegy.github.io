@@ -763,6 +763,109 @@ def article(p, prev, nxt):
                   ogimage=f"cover-{p['slug']}.webp")
 
 
+def jisr():
+    """صفحة تطبيق «جسر» — iegy.net/jisr. رابط التحميل ورقم الإصدار بيتحدّثوا لوحدهم من version.json على GitHub."""
+    feats = [
+        ("📤", "إرسال بأي حجم", "ملفات وصور وفيديو وتطبيقات وجهات اتصال ونصوص — حتى أكبر من 4 جيجا ومجلدات بآلاف الملفات."),
+        ("🔁", "مبيبدأش من الأول", "لو الاتصال قطع، النقل بيرجع لوحده ويكمّل من آخر بايت، حتى لو قفلت التطبيق."),
+        ("🔐", "مشفّر من طرف لطرف", "ECDH + AES-256-GCM وبصمة لكل ملف. مفيش سيرفر ولا حساب ولا إنترنت."),
+        ("🌐", "غرفة لأي متصفح", "آيفون أو كمبيوتر؟ افتح غرفة، وهم يدخلوا بمسح رمز: ملفات ونصوص وحافظة مشتركة ومجلد للتصفح."),
+        ("📱", "تغيير الهاتف", "جهات الاتصال والصور والفيديو والتطبيقات في خطوات بسيطة على الموبايل الجديد."),
+        ("💾", "نسخ احتياطي بدون سحابة", "بين جهازين، والتاني بيتخطى اللي عنده — كرره براحتك."),
+        ("✅", "أجهزة موثوقة", "بتتعرّف على جهازك بمفتاح هوية وبتبعت من غير ما تسأل، وبترفض أي منتحل."),
+        ("🖼️", "تصغير الصور (اختياري)", "صغّر الصور قبل الإرسال لو عايز، والفيديو بيتبعت بأصله دايمًا."),
+    ]
+    cards = "\n".join(f'<article class="jz-card reveal"><span class="jz-ic">{i}</span><h3>{t}</h3><p>{d}</p></article>' for i, t, d in feats)
+    faq = [
+        ("محتاج إنترنت؟", "لا. جسر بيشتغل على نفس الواي فاي، أو بيعمل شبكة واي فاي خاصة بين الجهازين من غير راوتر ولا باقة."),
+        ("أبعت لآيفون أو كمبيوتر؟", "أيوه، من «غرفة مشاركة»: بتفتح صفحة مؤقتة على موبايلك والطرف التاني بيدخلها من المتصفح من غير ما يثبّت حاجة."),
+        ("بيتوافق مع حصن؟", "أيوه، جسر وحصن بيتبادلوا الملفات مع بعض."),
+        ("فين بتتحفظ الملفات؟", "في مجلد Download/Jisr على الموبايل، والنسخ الاحتياطي في Download/Jisr Backup."),
+        ("آمن ولا لأ؟", "كل جلسة مشفّرة، وكل ملف بيتتحقق منه ببصمة SHA-256، والتحقق من الطرف التاني برمز QR أو أربع رموز تعبيرية، والأجهزة الموثوقة بتتعرّف بمفتاح هوية. والكود مفتوح على GitHub."),
+    ]
+    faq_html = "\n".join(f'<details class="jz-q reveal"><summary>{q}</summary><p>{a}</p></details>' for q, a in faq)
+    body = f"""
+<style>
+.jz-hero{{padding:clamp(28px,6vw,64px) 0 8px}}
+.jz-hero .wrap{{display:grid;gap:30px;align-items:center;grid-template-columns:1fr}}
+@media(min-width:860px){{.jz-hero .wrap{{grid-template-columns:1.2fr .8fr}}}}
+.jz-logo{{width:min(340px,70vw);justify-self:center;filter:drop-shadow(0 24px 40px rgba(14,59,42,.35));border-radius:28%}}
+.jz-cta{{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}}
+.jz-note{{color:var(--text-soft);font-size:.9rem;margin-top:12px}}
+.jz-grid{{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin-top:26px}}
+.jz-card{{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-sm)}}
+.jz-card h3{{margin:10px 0 6px;font-size:1.05rem}}
+.jz-card p{{margin:0;color:var(--text-soft);font-size:.95rem;line-height:1.8}}
+.jz-ic{{font-size:1.6rem}}
+.jz-steps{{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:22px;counter-reset:s}}
+.jz-step{{background:var(--bg-alt);border-radius:var(--radius-lg);padding:18px 18px 18px 18px;counter-increment:s}}
+.jz-step::before{{content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#1F7A55;color:#fff;font-weight:700;margin-bottom:8px}}
+.jz-q{{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:10px}}
+.jz-q summary{{cursor:pointer;font-weight:600}}
+.jz-q p{{margin:10px 0 0;color:var(--text-soft);line-height:1.8}}
+.jz-btn{{background:#1F7A55;color:#fff!important}}
+</style>
+<section class="jz-hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">JISR · جسر</div>
+      <h1 style="font-size:clamp(2rem,5vw,3.2rem)">جسر — شارك ملفاتك بين الأجهزة القريبة، بدون إنترنت</h1>
+      <p class="lead" style="margin-top:14px;max-width:560px">ملفات ومجلدات وصور وفيديو وتطبيقات ونصوص بين الموبايلات، ومن أي آيفون أو كمبيوتر من المتصفح. مشفّر، ومبيبدأش من الأول لو اتقطع.</p>
+      <div class="jz-cta">
+        <a id="jz-dl" class="btn btn-primary jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر مجانًا ⬇</a>
+        <a class="btn btn-outline" href="https://github.com/iegy/Jisr">الكود على GitHub</a>
+      </div>
+      <p class="jz-note" id="jz-ver">أندرويد 9 أو أحدث · مجاني بالكامل · من غير إعلانات ولا حسابات</p>
+      <p class="jz-note">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
+    </div>
+    <img class="jz-logo" src="jisr-logo.svg" alt="شعار جسر: الروبوت مو يعبر الجسر شايل ملف" width="340" height="340">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">FEATURES</div><h2>كل اللي تحتاجه لنقل الملفات</h2></div>
+    <div class="jz-grid">
+{cards}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">HOW IT WORKS</div><h2>تبعت في ثلاث خطوات</h2></div>
+    <div class="jz-steps">
+      <div class="jz-step reveal"><b>على الجهاز المستقبل</b><p>افتح «استقبال» — هيظهر رمز QR، وكمان بيظهر تلقائيًا للأجهزة القريبة.</p></div>
+      <div class="jz-step reveal"><b>على الجهاز المرسل</b><p>اختار الملفات أو المجلد، وامسح الرمز أو اختار الجهاز من القايمة.</p></div>
+      <div class="jz-step reveal"><b>وافق وخلاص</b><p>المستقبل بيوافق (أو الجهاز الموثوق بيدخل على طول) والنقل يبدأ، وبيكمّل لو اتقطع.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">FAQ</div><h2>أسئلة بتتسأل</h2></div>
+{faq_html}
+    <p style="margin-top:34px"><a class="link-out" href="work-jisr.html">قصة بناء جسر ←</a></p>
+  </div>
+</section>
+<script>
+fetch("https://raw.githubusercontent.com/iegy/Jisr/main/version.json",{{cache:"no-store"}}).then(function(r){{return r.ok?r.json():null}}).then(function(j){{
+  if(!j||!j.versionName)return;
+  var mb=j.size?(j.size/1048576).toFixed(1).replace(/\\.0$/,"")+" ميجا · ":"";
+  document.getElementById("jz-ver").textContent="الإصدار "+j.versionName+" · "+mb+"أندرويد 9 أو أحدث · مجاني بالكامل";
+}}).catch(function(){{}});
+</script>
+"""
+    ld = {"@context": "https://schema.org", "@type": "MobileApplication", "name": "جسر — Jisr",
+          "operatingSystem": "Android 9+", "applicationCategory": "UtilitiesApplication",
+          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+          "url": SITE + "jisr", "author": {"@type": "Person", "name": "Mohammed Hussein"}}
+    return render("jisr.html", "portfolio", "جسر — مشاركة الملفات بين الأجهزة بدون إنترنت | محمد حسين",
+                  "جسر: تطبيق أندرويد مجاني لنقل الملفات والمجلدات والنصوص بين الأجهزة القريبة بدون إنترنت، مشفّر، ويكمّل لو النقل اتقطع، مع غرفة ويب لأي آيفون أو كمبيوتر.",
+                  body, jsonld=ld, ogtype="website", ogimage="thumb-jisr.webp")
+
+
 def notfound():
     body = '''
 <section style="padding-block:clamp(70px,12vw,140px);text-align:center">
@@ -816,6 +919,7 @@ if __name__ == "__main__":
     for i, p in enumerate(POSTS):
         pages.append(article(p, POSTS[i - 1] if i > 0 else None,
                              POSTS[i + 1] if i < len(POSTS) - 1 else None))
+    pages.append(jisr())
     pages.append(notfound())
     extras(pages)
     print("✓ اتبنى %d صفحة:" % len(pages))
