@@ -777,6 +777,12 @@ def jisr():
                   body, jsonld=ld, ogtype="website", ogimage="thumb-jisr.webp")
 
 
+def jisr_privacy():
+    import jisr_privacy as jp
+    return render("jisr-privacy.html", "portfolio", "سياسة الخصوصية — جسر | محمد حسين",
+                  "سياسة خصوصية تطبيق جسر: مفيش حسابات ولا سيرفرات ولا تتبّع، والملفات بتنتقل مباشرة بين الأجهزة.", jp.page())
+
+
 def notfound():
     body = '''
 <section style="padding-block:clamp(70px,12vw,140px);text-align:center">
@@ -831,6 +837,7 @@ if __name__ == "__main__":
         pages.append(article(p, POSTS[i - 1] if i > 0 else None,
                              POSTS[i + 1] if i < len(POSTS) - 1 else None))
     pages.append(jisr())
+    pages.append(jisr_privacy())
     pages.append(notfound())
     extras(pages)
     print("✓ اتبنى %d صفحة:" % len(pages))

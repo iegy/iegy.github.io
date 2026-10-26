@@ -66,6 +66,10 @@ CSS = r"""
 .jz-hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:1.4}
 .jz-hero h1 em{font-style:normal;color:var(--gold);white-space:nowrap}
 .jz-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.jz-qr{display:none;align-items:center;gap:14px;margin-top:20px;font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.82)}
+.jz-qrbox{width:112px;height:112px;padding:6px;background:#fff;border-radius:12px;flex:none}
+.jz-qrbox svg{width:100%;height:100%;display:block}
+@media (hover:hover) and (pointer:fine) and (min-width:900px){.jz-qr{display:flex}}
 .jz-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .jz-pill{font-family:var(--font-mono);font-size:.74rem;padding:6px 13px;border:1px solid rgba(255,255,255,.22);border-radius:99px;color:#EAF4EE;background:rgba(255,255,255,.06);direction:rtl}
 .jz-note{font-size:.86rem;margin-top:14px;opacity:.85}
@@ -207,6 +211,7 @@ BODY = r"""
         <a id="jz-dl" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر مجانًا ⬇</a>
         <a class="btn btn-lg jz-ghost" href="#demo">جرّب الجسر بنفسك ↓</a>
       </div>
+      <div class="jz-qr"><div class="jz-qrbox">__QR__</div><div><b>على الكمبيوتر؟</b><br>صوّر الكود بموبايلك وحمّل جسر مباشرة.</div></div>
       <div class="jz-pills"><span class="jz-pill">بدون إنترنت</span><span class="jz-pill">بدون حساب</span><span class="jz-pill">مشفّر AES-256</span><span class="jz-pill">ملفات +4GB</span><span class="jz-pill">مجاني</span></div>
       <p class="jz-note" id="jz-ver">أندرويد 9 أو أحدث · من غير إعلانات ولا تتبّع</p>
     </div>
@@ -376,7 +381,7 @@ BODY = r"""
     <div class="big"><svg viewBox="0 0 58 78"><use href="#jz-mo"/></svg></div>
     <h2 class="reveal">يلا نعدّي؟</h2>
     <p class="lead reveal" style="margin:10px auto 0;max-width:520px">حمّل جسر وانقل أول ملف في دقيقة. مجاني، من غير إعلانات، ومن غير ما تسجّل.</p>
-    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a></div>
+    <div class="jz-cta"><a id="jz-dl2" class="btn btn-lg jz-btn" href="https://github.com/iegy/Jisr/releases/latest/download/Jisr.apk" download>حمّل جسر لأندرويد ⬇</a><a class="btn btn-lg jz-ghost" href="https://github.com/iegy/Jisr/releases">كل الإصدارات</a><a class="btn btn-lg jz-ghost" href="jisr-privacy.html">سياسة الخصوصية</a></div>
     <p class="jz-note" id="jz-ver2">أندرويد 9 أو أحدث</p>
     <p class="jz-note" style="max-width:560px;margin-inline:auto">أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» — ده عادي لأي تطبيق مش من المتجر.</p>
     <p class="jz-verify" id="jz-sha"></p>
@@ -552,6 +557,6 @@ def page():
         f'<article class="jz-card reveal" data-c="{c}"><div class="jz-ic" aria-hidden="true">{i}</div><h3>{t}</h3><p>{d}</p></article>'
         for c, i, t, d in FEATS)
     faq = "".join(f'<details class="jz-q reveal"><summary>{q}</summary><p>{a}</p></details>' for q, a in FAQ)
-    body = (BODY.replace("__MO__", mo).replace("__SCENE__", scene)
+    body = (BODY.replace("__MO__", mo).replace("__SCENE__", scene).replace("__QR__", open(os.path.join(HERE, "jisr-qr.svg.txt"), encoding="utf-8").read())
             .replace("__FILTERS__", filters).replace("__CARDS__", cards).replace("__FAQ__", faq))
     return CSS + body + JS
