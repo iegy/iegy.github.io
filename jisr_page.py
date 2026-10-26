@@ -311,7 +311,7 @@ BODY = r"""
           <div class="jz-row">📋 <b>اجتماع 5 المغرب</b><small>من اللابتوب</small></div>
         </div>
         <div class="jz-pane" data-p="people">
-          <div class="jz-row">💻 <b>لابتوب سارة</b><small>متصل</small></div>
+          <div class="jz-row">💻 <b>لابتوب Rona💚</b><small>متصل</small></div>
           <div class="jz-row">📱 <b>آيفون كريم</b><small>متصل</small></div>
           <div class="jz-row">⏳ <b>طلب دخول جديد</b><small>وافق · ارفض</small></div>
         </div>
