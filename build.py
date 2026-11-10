@@ -69,12 +69,29 @@ def svg(name):
 
 
 # ---------------------------------------------------------------- shared blocks
+def dl_attrs(d):
+    """رابط متجر (زي Microsoft Store) بيفتح في تبويب جديد، والملفات بتتحمّل مباشرة."""
+    return 'target="_blank" rel="noopener"' if d.get("store") else 'download'
+
+
+def dl_label(d):
+    return "حمّله من Microsoft Store ↗" if d.get("store") else "حمّله مجانًا ⬇"
+
+
+def dl_info(d, android="أندرويد"):
+    ver = f'الإصدار {d["version"]}' if d.get("version") else ''
+    size = d.get("size", "")
+    plat = d.get("platform", android)
+    return " · ".join(x for x in (ver, size, plat) if x)
+
+
 def work_card(p, idx=None):
     tags = "".join('<span class="tag">%s</span>' % t for t in p["tags"][:3])
     # المشاريع الهدية مالهاش موقع تزوره — ليها ملف تحمّله
     if p.get("gift"):
-        out_link = ('<a class="link-out is-gift" href="%s" download>حمّله مجانًا ⬇</a>'
-                    % DOWNLOADS[p["slug"]]["url"])
+        d = DOWNLOADS[p["slug"]]
+        out_link = ('<a class="link-out is-gift" href="%s" %s>%s</a>'
+                    % (d["url"], dl_attrs(d), dl_label(d)))
     else:
         out_link = ('<a class="link-out" href="%s" target="_blank" rel="noopener">زيارة الموقع ↗</a>'
                     % p["url"])
@@ -99,7 +116,6 @@ def work_card(p, idx=None):
 # ضيف تطبيق تالت في projects.py والقسم هيوسّع نفسه من غير ما تلمس الملف ده.
 def _gift_card(p):
     d = DOWNLOADS[p["slug"]]
-    size = f' · {d["size"]}' if d.get("size") else ''
     return f'''      <article class="app reveal">
         <a class="app-shot" href="work-{p['slug']}.html" aria-label="تفاصيل {d['name']}">
           <img src="thumb-{p['slug']}.webp" alt="لقطة من تطبيق {d['name']}" width="880" height="550" loading="lazy" decoding="async">
@@ -108,10 +124,10 @@ def _gift_card(p):
           <h3>{d['name']}</h3>
           <p>{d['line']}</p>
           <div class="app-actions">
-            <a href="{d['url']}" class="btn btn-primary" download>حمّله مجانًا ⬇</a>
+            <a href="{d['url']}" class="btn btn-primary" {dl_attrs(d)}>{dl_label(d)}</a>
             <a href="work-{p['slug']}.html" class="btn btn-outline">التفاصيل</a>
           </div>
-          <small>الإصدار {d['version']}{size} · أندرويد</small>
+          <small>{dl_info(d)}</small>
         </div>
       </article>'''
 
@@ -128,7 +144,7 @@ GIFT_BANNER = (f'''<section class="gift-wrap">
 ''' + "\n".join(_gift_card(p) for p in _gifts) + '''
     </div>
     <p class="gift-note">
-      أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» —
+      تطبيقات الأندرويد: أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من «مصدر غير معروف» —
       ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.
     </p>
   </div>
@@ -579,13 +595,20 @@ def case(p, prev, nxt):
     meta = "\n".join(f'      <div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in p["meta"])
     if p.get("gift"):
         d = DOWNLOADS[p["slug"]]
-        size = f' · {d["size"]}' if d.get("size") else ''
-        hero_btn = (f'<a href="{d["url"]}" class="btn btn-primary" download>'
-                    f'حمّل {d["name"]} مجانًا ⬇</a>')
+        if d.get("store"):
+            hero_btn = (f'<a href="{d["url"]}" class="btn btn-primary" {dl_attrs(d)}>'
+                        f'حمّل {d["name"]} من Microsoft Store ↗</a>')
+            note = ('<span>التثبيت والتحديثات من المتجر نفسه — آمن ومن غير أي تحذير من ويندوز. '
+                    f'وفيه كمان نسخة محمولة بدون تثبيت على <a href="{p["url"]}">موقع البرنامج</a>.</span>')
+        else:
+            hero_btn = (f'<a href="{d["url"]}" class="btn btn-primary" download>'
+                        f'حمّل {d["name"]} مجانًا ⬇</a>')
+            note = ('<span>أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من مصدر غير معروف — '
+                    'ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.</span>')
         install_note = f'''    <div class="install-note">
       <b>مجاني بالكامل</b> — نسخة كاملة من غير إعلانات ولا علامة مائية ولا اشتراك.
-      الإصدار {d["version"]}{size} · لأجهزة أندرويد.
-      <span>أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من مصدر غير معروف — ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.</span>
+      {dl_info(d, "لأجهزة أندرويد")}.
+      {note}
     </div>'''
     else:
         hero_btn = (f'<a href="{p["url"]}" class="btn btn-primary" target="_blank" '
