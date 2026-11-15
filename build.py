@@ -85,6 +85,14 @@ def dl_info(d, android="أندرويد"):
     return " · ".join(x for x in (ver, size, plat) if x)
 
 
+def win_line(d):
+    """لو للتطبيق نسخة ويندوز: سطر صغير برابطها تحت معلومات الأندرويد."""
+    w = d.get("win")
+    if not w: return ''
+    return (f'<br>ويندوز: <a href="{w["url"]}" download>حمّل Hisn-Setup.exe</a> · '
+            f'الإصدار {w["version"]} · {w["size"]}')
+
+
 def work_card(p, idx=None):
     tags = "".join('<span class="tag">%s</span>' % t for t in p["tags"][:3])
     # المشاريع الهدية مالهاش موقع تزوره — ليها ملف تحمّله
@@ -127,7 +135,7 @@ def _gift_card(p):
             <a href="{d['url']}" class="btn btn-primary" {dl_attrs(d)}>{dl_label(d)}</a>
             <a href="work-{p['slug']}.html" class="btn btn-outline">التفاصيل</a>
           </div>
-          <small>{dl_info(d)}</small>
+          <small>{dl_info(d)}{win_line(d)}</small>
         </div>
       </article>'''
 
@@ -605,6 +613,16 @@ def case(p, prev, nxt):
                         f'حمّل {d["name"]} مجانًا ⬇</a>')
             note = ('<span>أول ما تفتح الملف، أندرويد هيسألك تسمح بالتثبيت من مصدر غير معروف — '
                     'ده عادي في أي تطبيق مش نازل من المتجر. اضغط «السماح» وكمّل.</span>')
+            w = d.get("win")
+            if w:
+                hero_btn = (f'<a href="{d["url"]}" class="btn btn-primary" download>'
+                            f'حمّل {d["name"]} لأندرويد ⬇</a>\n      '
+                            f'<a href="{w["url"]}" class="btn btn-primary" download>'
+                            f'حمّل {d["name"]} لويندوز ⬇</a>')
+                note = (f'<br>ويندوز: الإصدار {w["version"]} · {w["size"]} · ويندوز 10 أو أحدث، وبيحدّث نفسه لوحده.'
+                        + note +
+                        '<span>على ويندوز: لو ظهرت رسالة «حمى Windows جهاز الكمبيوتر» اضغط «مزيد من المعلومات» '
+                        'ثم «تشغيل على أي حال» — البرنامج لسه من غير توقيع رقمي.</span>')
         install_note = f'''    <div class="install-note">
       <b>مجاني بالكامل</b> — نسخة كاملة من غير إعلانات ولا علامة مائية ولا اشتراك.
       {dl_info(d, "لأجهزة أندرويد")}.
