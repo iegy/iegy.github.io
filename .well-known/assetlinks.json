@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "net.iegy.typewriter",
+    "sha256_cert_fingerprints": ["35:10:A2:0A:72:7B:0B:B2:37:B9:62:35:99:2E:65:6E:86:38:70:B7:75:33:FD:A1:52:5E:1D:AC:61:CC:48:DB"]
+  }
+}]
