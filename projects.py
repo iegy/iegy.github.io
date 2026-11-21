@@ -550,7 +550,7 @@ DOWNLOADS = {
         # نسخة ويندوز: الرابط ده دايمًا بيجيب أحدث مثبّت.
         "win": {
             "url":     "https://github.com/egytop/H-releases/releases/latest/download/Hisn-Setup.exe",
-            "version": "2.24.0",
+            "version": "2.24.1",
             "size":    "198 ميجا",
         },
     },
